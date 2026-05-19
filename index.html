@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- saved from url=(0045)file:///C:/Users/berne/Downloads/index_3.html -->
+<!-- saved from url=(0045)file:///C:/Users/berne/Downloads/index_4.html -->
 <html lang="zh-Hant"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
@@ -16,7 +16,7 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com/">
 <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
-<link href="./科學八字｜決策系統 — 不是命運，是你的決策結構_files/css2" rel="stylesheet">
+<link href="./index_files/css2" rel="stylesheet">
 
 <style>
 /* ============ 變數與重置 ============ */
@@ -783,6 +783,119 @@ ul{list-style:none}
 /* 進場淡入 */
 .fade-in{opacity:0;transform:translateY(20px);transition:opacity .6s ease, transform .6s ease}
 .fade-in.visible{opacity:1;transform:translateY(0)}
+
+/* ============ 聯絡 Modal ============ */
+.contact-overlay{
+  position:fixed; inset:0; z-index:100;
+  background-color:rgba(5,6,10,.85);
+  -webkit-backdrop-filter:blur(8px);
+  backdrop-filter:blur(8px);
+  display:none;
+  align-items:center; justify-content:center;
+  padding:20px;
+  animation:fadeIn .3s ease;
+}
+.contact-overlay.open{display:flex}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+
+.contact-modal{
+  position:relative;
+  width:100%; max-width:440px;
+  background-color:#0F121C;
+  background-image:linear-gradient(180deg,rgba(22,27,42,.95) 0%,rgba(15,18,28,.95) 100%);
+  border:1px solid rgba(212,162,74,.4);
+  border-radius:20px;
+  padding:32px 24px;
+  box-shadow:0 24px 80px rgba(0,0,0,.6), 0 0 60px rgba(212,162,74,.15);
+  animation:slideUp .4s cubic-bezier(.16,1,.3,1);
+}
+@media(min-width:480px){.contact-modal{padding:40px 32px}}
+@keyframes slideUp{
+  from{opacity:0;transform:translateY(40px) scale(.95)}
+  to{opacity:1;transform:translateY(0) scale(1)}
+}
+
+.contact-close{
+  position:absolute; top:14px; right:14px;
+  width:36px; height:36px; border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+  color:#71717A; transition:all .2s;
+  background:transparent; border:1px solid transparent;
+}
+.contact-close:hover{color:var(--gold-200);background:rgba(212,162,74,.08);border-color:rgba(212,162,74,.2)}
+
+.contact-head{text-align:center;margin-bottom:28px}
+.contact-head .badge{margin-bottom:14px}
+.contact-head h3{
+  font-family:"Noto Serif TC",serif; font-weight:700; font-size:22px;
+  color:#fff; margin-bottom:8px; line-height:1.4;
+}
+@media(min-width:480px){.contact-head h3{font-size:24px}}
+.contact-head .sub{font-size:13px;color:#A1A1AA;line-height:1.6}
+.contact-plan-tag{
+  display:inline-block;margin-top:8px;
+  padding:4px 12px;border-radius:999px;
+  background:rgba(212,162,74,.1);
+  border:1px solid rgba(212,162,74,.3);
+  font-size:12px;
+  color:var(--gold-200);
+}
+.contact-plan-tag.hidden{display:none}
+
+.contact-options{display:flex;flex-direction:column;gap:12px}
+
+.contact-option{
+  display:flex; align-items:center; gap:14px;
+  padding:16px 18px; border-radius:14px;
+  border:1px solid rgba(212,162,74,.2);
+  background-color:rgba(10,12,20,.6);
+  transition:all .25s;
+  cursor:pointer;
+  text-decoration:none;
+  color:inherit;
+  width:100%;
+  text-align:left;
+}
+.contact-option:hover{
+  border-color:rgba(212,162,74,.5);
+  background-color:rgba(22,27,42,.8);
+  transform:translateY(-2px);
+  box-shadow:0 8px 24px rgba(0,0,0,.4);
+}
+.contact-option:active{transform:translateY(0)}
+
+.contact-option-icon{
+  flex-shrink:0;
+  width:48px; height:48px; border-radius:12px;
+  display:flex; align-items:center; justify-content:center;
+}
+.contact-option.line .contact-option-icon{
+  background:linear-gradient(135deg,#06C755 0%,#04A047 100%);
+  color:#fff;
+  box-shadow:0 4px 12px rgba(6,199,85,.25);
+}
+.contact-option.email .contact-option-icon{
+  background:linear-gradient(135deg,var(--gold-400) 0%,var(--gold-600) 100%);
+  color:var(--ink-950);
+  box-shadow:0 4px 12px rgba(212,162,74,.25);
+}
+
+.contact-option-text{flex:1;min-width:0}
+.contact-option-title{font-size:15px;font-weight:700;color:#fff;margin-bottom:2px}
+.contact-option-desc{font-size:12px;color:#A1A1AA;word-break:break-all}
+
+.contact-option-arrow{
+  flex-shrink:0;color:#52525B;transition:all .25s;
+}
+.contact-option:hover .contact-option-arrow{color:var(--gold-200);transform:translateX(3px)}
+
+.contact-footer-note{
+  margin-top:20px;padding-top:16px;
+  border-top:1px solid rgba(63,63,70,.5);
+  font-size:11px;color:#71717A;text-align:center;line-height:1.6;
+  font-family:"JetBrains Mono",monospace;letter-spacing:.05em;
+}
+.contact-footer-note .ld-id{color:var(--gold-200);font-weight:700;letter-spacing:.1em}
 </style>
 </head>
 <body>
@@ -790,7 +903,7 @@ ul{list-style:none}
 <!-- ====== Navbar ====== -->
 <header class="navbar" id="navbar">
   <div class="navbar-inner">
-    <a href="file:///C:/Users/berne/Downloads/index_3.html#top" class="logo">
+    <a href="file:///C:/Users/berne/Downloads/index_4.html#top" class="logo">
       <svg width="40" height="40" viewBox="0 0 64 64" fill="none">
         <defs>
           <lineargradient id="goldGrad" x1="0" y1="0" x2="1" y2="1">
@@ -825,14 +938,14 @@ ul{list-style:none}
     </a>
 
     <nav class="nav-links">
-      <a href="file:///C:/Users/berne/Downloads/index_3.html#phases">六大決策期</a>
-      <a href="file:///C:/Users/berne/Downloads/index_3.html#scores">評估指標</a>
-      <a href="file:///C:/Users/berne/Downloads/index_3.html#pricing">服務方案</a>
-      <a href="file:///C:/Users/berne/Downloads/index_3.html#process">流程</a>
-      <a href="file:///C:/Users/berne/Downloads/index_3.html#faq">常見問題</a>
+      <a href="file:///C:/Users/berne/Downloads/index_4.html#phases">六大決策期</a>
+      <a href="file:///C:/Users/berne/Downloads/index_4.html#scores">評估指標</a>
+      <a href="file:///C:/Users/berne/Downloads/index_4.html#pricing">服務方案</a>
+      <a href="file:///C:/Users/berne/Downloads/index_4.html#process">流程</a>
+      <a href="file:///C:/Users/berne/Downloads/index_4.html#faq">常見問題</a>
     </nav>
 
-    <a href="file:///C:/Users/berne/Downloads/index_3.html#pricing" class="nav-cta">
+    <a href="file:///C:/Users/berne/Downloads/index_4.html#" class="nav-cta" onclick="openContact(); return false;">
       <button class="btn btn-primary">立即預約</button>
     </a>
 
@@ -845,12 +958,12 @@ ul{list-style:none}
 
   <div class="mobile-menu" id="mobileMenu">
     <div class="mobile-menu-inner">
-      <a href="file:///C:/Users/berne/Downloads/index_3.html#phases">六大決策期</a>
-      <a href="file:///C:/Users/berne/Downloads/index_3.html#scores">評估指標</a>
-      <a href="file:///C:/Users/berne/Downloads/index_3.html#pricing">服務方案</a>
-      <a href="file:///C:/Users/berne/Downloads/index_3.html#process">流程</a>
-      <a href="file:///C:/Users/berne/Downloads/index_3.html#faq">常見問題</a>
-      <a href="file:///C:/Users/berne/Downloads/index_3.html#pricing"><button class="btn btn-primary">立即預約</button></a>
+      <a href="file:///C:/Users/berne/Downloads/index_4.html#phases">六大決策期</a>
+      <a href="file:///C:/Users/berne/Downloads/index_4.html#scores">評估指標</a>
+      <a href="file:///C:/Users/berne/Downloads/index_4.html#pricing">服務方案</a>
+      <a href="file:///C:/Users/berne/Downloads/index_4.html#process">流程</a>
+      <a href="file:///C:/Users/berne/Downloads/index_4.html#faq">常見問題</a>
+      <a href="file:///C:/Users/berne/Downloads/index_4.html#" onclick="openContact(); return false;"><button class="btn btn-primary">立即預約</button></a>
     </div>
   </div>
 </header>
@@ -878,8 +991,8 @@ ul{list-style:none}
 透過八字結構、決策週期與行動策略，幫你看清現在的位置，做出更準確的選擇。</p>
 
         <div class="hero-cta">
-          <a href="file:///C:/Users/berne/Downloads/index_3.html#pricing"><button class="btn btn-primary">立即預約分析 →</button></a>
-          <a href="file:///C:/Users/berne/Downloads/index_3.html#pricing"><button class="btn btn-ghost">查看服務方案</button></a>
+          <a href="file:///C:/Users/berne/Downloads/index_4.html#" onclick="openContact(); return false;"><button class="btn btn-primary">立即預約分析 →</button></a>
+          <a href="file:///C:/Users/berne/Downloads/index_4.html#pricing"><button class="btn btn-ghost">查看服務方案</button></a>
         </div>
 
         <div class="hero-meta">
@@ -914,8 +1027,8 @@ ul{list-style:none}
               <span class="score-en">STRUCTURE</span>
             </div>
             <div class="score-label">結構分數</div>
-            <div class="score-value" id="score-structure" data-base="68" style="transition: text-shadow 0.2s, transform 0.2s;">68</div>
-            <div class="score-bar"><div data-w="68" id="bar-structure" style="width: 68%;"></div></div>
+            <div class="score-value" id="score-structure" data-base="68" style="transition: text-shadow 0.2s, transform 0.2s;">70</div>
+            <div class="score-bar"><div data-w="68" id="bar-structure" style="width: 70%;"></div></div>
           </div>
 
           <div class="score-card c-orange">
@@ -926,8 +1039,8 @@ ul{list-style:none}
               <span class="score-en">RISK</span>
             </div>
             <div class="score-label">風險分數</div>
-            <div class="score-value" id="score-risk" data-base="42" style="transition: text-shadow 0.2s, transform 0.2s;">40</div>
-            <div class="score-bar"><div data-w="42" id="bar-risk" style="width: 40%;"></div></div>
+            <div class="score-value" id="score-risk" data-base="42" style="transition: text-shadow 0.2s, transform 0.2s;">37</div>
+            <div class="score-bar"><div data-w="42" id="bar-risk" style="width: 37%;"></div></div>
           </div>
 
           <div class="score-card c-green">
@@ -938,8 +1051,8 @@ ul{list-style:none}
               <span class="score-en">ACTION</span>
             </div>
             <div class="score-label">行動分數</div>
-            <div class="score-value" id="score-action" data-base="71" style="transition: text-shadow 0.2s, transform 0.2s;">71</div>
-            <div class="score-bar"><div data-w="71" id="bar-action" style="width: 71%;"></div></div>
+            <div class="score-value" id="score-action" data-base="71" style="transition: text-shadow 0.2s, transform 0.2s;">66</div>
+            <div class="score-bar"><div data-w="71" id="bar-action" style="width: 66%;"></div></div>
           </div>
 
           <div class="score-card c-purple">
@@ -950,8 +1063,8 @@ ul{list-style:none}
               <span class="score-en">SUPPORT</span>
             </div>
             <div class="score-label">支援分數</div>
-            <div class="score-value" id="score-support" data-base="66" style="transition: text-shadow 0.2s, transform 0.2s;">63</div>
-            <div class="score-bar"><div data-w="66" id="bar-support" style="width: 63%;"></div></div>
+            <div class="score-value" id="score-support" data-base="66" style="transition: text-shadow 0.2s, transform 0.2s;">64</div>
+            <div class="score-bar"><div data-w="66" id="bar-support" style="width: 64%;"></div></div>
           </div>
         </div>
 
@@ -1294,7 +1407,7 @@ ul{list-style:none}
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>簡短行動建議</li>
         </ul>
         <p class="plan-copy">快速知道你現在在哪個局，避免在錯的狀態下做錯決定。</p>
-        <a href="file:///C:/Users/berne/Downloads/index_3.html#cta"><button class="btn btn-ghost">預約 Decision Scan</button></a>
+        <a href="file:///C:/Users/berne/Downloads/index_4.html#" onclick="openContact(&#39;Decision Scan（入門方案）&#39;); return false;"><button class="btn btn-ghost">預約 Decision Scan</button></a>
       </div>
 
       <!-- Blueprint (featured) -->
@@ -1321,7 +1434,7 @@ ul{list-style:none}
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>50 分鐘線上深度解讀</li>
         </ul>
         <p class="plan-copy">這不是解盤，是建立你的決策模型。給你一套可以重複使用的判斷系統。</p>
-        <a href="file:///C:/Users/berne/Downloads/index_3.html#cta"><button class="btn btn-primary">預約 Decision Blueprint →</button></a>
+        <a href="file:///C:/Users/berne/Downloads/index_4.html#" onclick="openContact(&#39;Decision Blueprint（核心方案）&#39;); return false;"><button class="btn btn-primary">預約 Decision Blueprint →</button></a>
       </div>
 
       <!-- Precision -->
@@ -1343,7 +1456,7 @@ ul{list-style:none}
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>行動方向校準</li>
         </ul>
         <p class="plan-copy">僅限已建立基礎分析者，針對關鍵決策一對一深度校準。</p>
-        <a href="file:///C:/Users/berne/Downloads/index_3.html#cta"><button class="btn btn-ghost">預約 Precision Session</button></a>
+        <a href="file:///C:/Users/berne/Downloads/index_4.html#" onclick="openContact(&#39;Precision Session（進階方案）&#39;); return false;"><button class="btn btn-ghost">預約 Precision Session</button></a>
       </div>
     </div>
 
@@ -1359,7 +1472,7 @@ ul{list-style:none}
           <h3 class="name">Strategic Subscription</h3>
           <div><span class="price">NTD 2400</span><span class="note">/ 月</span></div>
           <p class="copy">長期校準，避免走偏。讓你的決策系統持續進化。</p>
-          <a href="file:///C:/Users/berne/Downloads/index_3.html#cta"><button class="btn btn-ghost">預約 Strategic Subscription</button></a>
+          <a href="file:///C:/Users/berne/Downloads/index_4.html#" onclick="openContact(&#39;Strategic Subscription（長期方案）&#39;); return false;"><button class="btn btn-ghost">預約 Strategic Subscription</button></a>
         </div>
         <div class="longterm-detail">
           <span class="label">INCLUDES</span>
@@ -1615,8 +1728,8 @@ ul{list-style:none}
     <p class="sub">看對週期，做對決策。
 你的人生將會不同。</p>
     <div class="actions">
-      <a href="file:///C:/Users/berne/Downloads/index_3.html#pricing"><button class="btn btn-primary">立即預約命理決策分析 →</button></a>
-      <a href="file:///C:/Users/berne/Downloads/index_3.html#pricing"><button class="btn btn-ghost">
+      <a href="file:///C:/Users/berne/Downloads/index_4.html#" onclick="openContact(); return false;"><button class="btn btn-primary">立即預約命理決策分析 →</button></a>
+      <a href="file:///C:/Users/berne/Downloads/index_4.html#" onclick="openContact(); return false;"><button class="btn btn-ghost">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
         私訊諮詢服務方案
       </button></a>
@@ -1669,10 +1782,10 @@ ul{list-style:none}
 
       <div class="footer-nav">
         <span class="label">NAVIGATION</span>
-        <a href="file:///C:/Users/berne/Downloads/index_3.html#phases">六大決策期</a>
-        <a href="file:///C:/Users/berne/Downloads/index_3.html#scores">評估指標</a>
-        <a href="file:///C:/Users/berne/Downloads/index_3.html#pricing">服務方案</a>
-        <a href="file:///C:/Users/berne/Downloads/index_3.html#faq">常見問題</a>
+        <a href="file:///C:/Users/berne/Downloads/index_4.html#phases">六大決策期</a>
+        <a href="file:///C:/Users/berne/Downloads/index_4.html#scores">評估指標</a>
+        <a href="file:///C:/Users/berne/Downloads/index_4.html#pricing">服務方案</a>
+        <a href="file:///C:/Users/berne/Downloads/index_4.html#faq">常見問題</a>
       </div>
     </div>
 
@@ -1683,7 +1796,120 @@ ul{list-style:none}
   </div>
 </footer>
 
+<!-- ====== Contact Modal ====== -->
+<div class="contact-overlay" id="contactOverlay" onclick="closeContactIfBackdrop(event)">
+  <div class="contact-modal" role="dialog" aria-modal="true" aria-labelledby="contactTitle">
+    <button class="contact-close" onclick="closeContact()" aria-label="關閉">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+        <line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line>
+      </svg>
+    </button>
+
+    <div class="contact-head">
+      <div class="badge"><span class="dot"></span>CONTACT</div>
+      <h3 id="contactTitle">選擇聯絡方式</h3>
+      <p class="sub">透過以下管道與我聯繫，我會盡快回覆。</p>
+      <div class="contact-plan-tag hidden" id="contactPlanTag"></div>
+    </div>
+
+    <div class="contact-options">
+      <a class="contact-option line" id="contactLine" href="file:///C:/Users/berne/Downloads/index_4.html#" target="_blank" rel="noopener">
+        <div class="contact-option-icon">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M19.365 9.863c.349 0 .63.285.631.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63 0 .344-.282.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63h2.387c.345 0 .627.285.627.63 0 .349-.283.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63.346 0 .628.285.628.63v4.771zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.348 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.63 0 .344-.282.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"></path>
+          </svg>
+        </div>
+        <div class="contact-option-text">
+          <div class="contact-option-title">LINE 私訊</div>
+          <div class="contact-option-desc">ID：smilemusic1116</div>
+        </div>
+        <span class="contact-option-arrow">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+        </span>
+      </a>
+
+      <a class="contact-option email" id="contactEmail" href="file:///C:/Users/berne/Downloads/index_4.html#">
+        <div class="contact-option-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+            <polyline points="22,6 12,13 2,6"></polyline>
+          </svg>
+        </div>
+        <div class="contact-option-text">
+          <div class="contact-option-title">Email 寄信</div>
+          <div class="contact-option-desc">berney0985@gmail.com</div>
+        </div>
+        <span class="contact-option-arrow">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+        </span>
+      </a>
+    </div>
+
+    <div class="contact-footer-note">
+      LINE ID <span class="ld-id">smilemusic1116</span> · 點擊後將開啟對應 App
+    </div>
+  </div>
+</div>
+
 <script>
+// ============ 聯絡 Modal ============
+const LINE_ID = 'smilemusic1116';
+const EMAIL = 'berney0985@gmail.com';
+
+function openContact(planName) {
+  const overlay = document.getElementById('contactOverlay');
+  const planTag = document.getElementById('contactPlanTag');
+  const lineLink = document.getElementById('contactLine');
+  const emailLink = document.getElementById('contactEmail');
+
+  // 預填訊息：如果有方案名稱就帶入
+  let msg, mailSubject, mailBody;
+  if (planName) {
+    planTag.textContent = '方案：' + planName;
+    planTag.classList.remove('hidden');
+    msg = `您好，我想預約「${planName}」，想了解後續流程，謝謝。`;
+    mailSubject = `[預約諮詢] ${planName}`;
+    mailBody = `您好，\n\n我想預約「${planName}」，想了解後續流程。\n\n姓名：\n聯絡方式：\n希望時段：\n\n謝謝。`;
+  } else {
+    planTag.classList.add('hidden');
+    msg = `您好，我想了解「科學八字｜決策系統」的服務方案，謝謝。`;
+    mailSubject = `[預約諮詢] 科學八字｜決策系統`;
+    mailBody = `您好，\n\n我想了解「科學八字｜決策系統」的服務方案。\n\n姓名：\n聯絡方式：\n想諮詢的問題：\n\n謝謝。`;
+  }
+
+  // LINE：手機會直接開 LINE App，桌機開網頁版
+  // 用官方 search query 開啟「加入好友」頁，並帶入預填訊息
+  const ua = navigator.userAgent || '';
+  const isMobile = /iPhone|iPad|iPod|Android/i.test(ua);
+  if (isMobile) {
+    // 手機：line://ti/p/~ID 會直接開 App 加好友
+    lineLink.href = `https://line.me/R/ti/p/~${LINE_ID}`;
+  } else {
+    // 桌機：開網頁版搜尋
+    lineLink.href = `https://line.me/R/ti/p/~${LINE_ID}`;
+  }
+
+  // Email：開啟預設信箱 App 並預填主旨與內容
+  emailLink.href = `mailto:${EMAIL}?subject=${encodeURIComponent(mailSubject)}&body=${encodeURIComponent(mailBody)}`;
+
+  overlay.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeContact() {
+  document.getElementById('contactOverlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function closeContactIfBackdrop(event) {
+  if (event.target.id === 'contactOverlay') closeContact();
+}
+
+// ESC 鍵關閉
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') closeContact();
+});
+
 // 導覽列捲動效果
 const navbar = document.getElementById('navbar');
 window.addEventListener('scroll', () => {
