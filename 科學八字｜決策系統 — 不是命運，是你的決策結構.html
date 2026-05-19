@@ -1,0 +1,1800 @@
+<!DOCTYPE html>
+<!-- saved from url=(0045)file:///C:/Users/berne/Downloads/index_3.html -->
+<html lang="zh-Hant"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#05060A">
+<meta name="color-scheme" content="dark">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="format-detection" content="telephone=no">
+<title>科學八字｜決策系統 — 不是命運，是你的決策結構</title>
+<meta name="description" content="我不算命，我只優化你的決策品質。透過八字結構、決策週期與行動策略，幫你看清現在的位置，做出更準確的選擇。">
+<meta property="og:title" content="科學八字｜決策系統">
+<meta property="og:description" content="不是預測未來，是看清現在的結構。">
+<meta property="og:type" content="website">
+
+<link rel="preconnect" href="https://fonts.googleapis.com/">
+<link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
+<link href="./科學八字｜決策系統 — 不是命運，是你的決策結構_files/css2" rel="stylesheet">
+
+<style>
+/* ============ 變數與重置 ============ */
+:root{
+  --ink-950:#05060A; --ink-900:#0A0C14; --ink-800:#0F121C;
+  --ink-700:#161B2A; --ink-600:#1E2438;
+  --gold-200:#F5D88A; --gold-400:#E8B544; --gold-500:#D4A24A; --gold-600:#B68637;
+  --cyan:#22D3EE; --blue:#3B82F6; --purple:#A855F7;
+  --green:#22C55E; --lime:#84CC16; --orange:#F59E0B; --rose:#F43F5E;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{
+  background-color:#05060A !important;
+  min-height:100vh;
+  min-height:100dvh;
+}
+html{scroll-behavior:smooth}
+body{
+  color:#E5E7EB;
+  font-family:"Noto Sans TC",system-ui,sans-serif;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+  line-height:1.6;
+  /* iOS 橡皮筋滾動時的背景色 */
+  -webkit-tap-highlight-color:transparent;
+}
+body::before{
+  content:""; position:fixed; inset:0; pointer-events:none; z-index:0;
+  background-color:#05060A;
+  background-image:
+    radial-gradient(1200px 600px at 10% -10%, rgba(59,130,246,.10), transparent 60%),
+    radial-gradient(900px 500px at 90% 110%, rgba(168,85,247,.08), transparent 60%),
+    radial-gradient(700px 400px at 50% 50%, rgba(212,162,74,.04), transparent 70%);
+}
+.serif{font-family:"Noto Serif TC",serif}
+.mono{font-family:"JetBrains Mono",monospace}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+button{font:inherit;cursor:pointer;border:none;background:none;color:inherit}
+ul{list-style:none}
+
+/* ============ 通用工具 ============ */
+.container{max-width:1200px;margin:0 auto;padding:0 20px;position:relative;z-index:1}
+@media(min-width:768px){.container{padding:0 32px}}
+
+.gold-text{
+  background:linear-gradient(135deg,#F5D88A 0%,#D4A24A 50%,#B68637 100%);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+
+.bg-techgrid{
+  background-image:
+    linear-gradient(rgba(212,162,74,.05) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(212,162,74,.05) 1px,transparent 1px);
+  background-size:48px 48px;
+}
+.bg-dotgrid{
+  background-image:radial-gradient(rgba(212,162,74,.18) 1px,transparent 1px);
+  background-size:22px 22px;
+}
+
+.glass{
+  /* fallback：iOS 較舊版本不支援 backdrop-filter，先給實心深色背景 */
+  background-color:#0F121C;
+  background-image:linear-gradient(180deg,rgba(22,27,42,.92) 0%,rgba(15,18,28,.92) 100%);
+  -webkit-backdrop-filter:blur(12px);
+  backdrop-filter:blur(12px);
+  border:1px solid rgba(212,162,74,.18);
+  box-shadow:inset 0 1px 0 0 rgba(255,255,255,.04),0 8px 32px rgba(0,0,0,.5);
+  border-radius:16px;
+  position:relative;
+}
+/* 支援 backdrop-filter 時才使用半透明背景 */
+@supports ((-webkit-backdrop-filter:blur(1px)) or (backdrop-filter:blur(1px))){
+  .glass{
+    background-image:linear-gradient(180deg,rgba(22,27,42,.7) 0%,rgba(15,18,28,.7) 100%);
+  }
+}
+
+/* HUD 角標 */
+.hud{position:relative}
+.hud::before,.hud::after,.hud-c1,.hud-c2{
+  content:""; position:absolute; width:12px; height:12px;
+  border-color:rgba(212,162,74,.5); border-style:solid;
+}
+.hud::before{top:-1px;left:-1px;border-width:1px 0 0 1px}
+.hud::after{top:-1px;right:-1px;border-width:1px 1px 0 0}
+.hud .hud-c1{bottom:-1px;left:-1px;border-width:0 0 1px 1px;
+  border-color:rgba(212,162,74,.5);border-style:solid;
+}
+.hud .hud-c2{bottom:-1px;right:-1px;border-width:0 1px 1px 0;
+  border-color:rgba(212,162,74,.5);border-style:solid;
+}
+
+/* 按鈕 */
+.btn{
+  display:inline-flex; align-items:center; justify-content:center;
+  gap:8px; padding:14px 28px; border-radius:12px;
+  font-weight:700; font-size:15px; transition:all .3s;
+}
+.btn-primary{
+  background:linear-gradient(180deg,var(--gold-400) 0%,var(--gold-600) 100%);
+  color:var(--ink-950);
+  box-shadow:0 8px 32px rgba(212,162,74,.35),inset 0 1px 0 rgba(255,255,255,.4);
+}
+.btn-primary:hover{
+  transform:translateY(-2px);
+  box-shadow:0 12px 40px rgba(212,162,74,.55),inset 0 1px 0 rgba(255,255,255,.5);
+}
+.btn-ghost{
+  border:1px solid #3F3F46; background-color:#0F121C;
+  color:#F4F4F5;
+  -webkit-backdrop-filter:blur(4px);
+  backdrop-filter:blur(4px);
+}
+.btn-ghost:hover{
+  border-color:rgba(212,162,74,.5);
+  background:rgba(22,27,42,.6); color:var(--gold-200);
+}
+
+/* badge */
+.badge{
+  display:inline-flex; align-items:center; gap:8px;
+  padding:6px 12px; border-radius:999px;
+  border:1px solid rgba(212,162,74,.3);
+  background:rgba(212,162,74,.05);
+  font-size:11px; letter-spacing:.25em;
+  font-family:"JetBrains Mono",monospace;
+  color:rgba(245,216,138,.9);
+}
+.badge .dot{width:6px;height:6px;border-radius:50%;background:var(--gold-400);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+
+/* ============ Section 標題 ============ */
+.section{padding:80px 0;position:relative}
+@media(min-width:768px){.section{padding:112px 0}}
+.section-bg-grid::after{content:"";position:absolute;inset:0;background-image:
+  linear-gradient(rgba(212,162,74,.05) 1px,transparent 1px),
+  linear-gradient(90deg,rgba(212,162,74,.05) 1px,transparent 1px);
+  background-size:48px 48px;opacity:.4;pointer-events:none;
+}
+.section-bg-dots::after{content:"";position:absolute;inset:0;
+  background-image:radial-gradient(rgba(212,162,74,.18) 1px,transparent 1px);
+  background-size:22px 22px;opacity:.25;pointer-events:none;
+}
+
+.section-head{text-align:center;margin-bottom:48px}
+@media(min-width:768px){.section-head{margin-bottom:64px}}
+.section-head .badge{margin-bottom:20px}
+.section-head h2{
+  font-family:"Noto Serif TC",serif; font-weight:900;
+  font-size:30px; line-height:1.15; color:#fff;
+}
+@media(min-width:768px){.section-head h2{font-size:48px}}
+.section-head .sub{
+  margin-top:16px; color:#A1A1AA; font-size:15px;
+  max-width:640px; margin-left:auto; margin-right:auto;
+  white-space:pre-line; line-height:1.7;
+}
+
+/* ============ Navbar ============ */
+.navbar{
+  position:fixed; top:0; left:0; right:0; z-index:50;
+  transition:all .3s;
+}
+.navbar.scrolled{
+  background-color:#05060A;
+  background-image:linear-gradient(180deg,rgba(5,6,10,.92),rgba(5,6,10,.92));
+  -webkit-backdrop-filter:blur(16px);
+  backdrop-filter:blur(16px);
+  border-bottom:1px solid rgba(212,162,74,.1);
+}
+.navbar-inner{
+  max-width:1200px; margin:0 auto; padding:0 20px;
+  height:64px; display:flex; align-items:center; justify-content:space-between;
+}
+@media(min-width:768px){.navbar-inner{height:72px;padding:0 32px}}
+.nav-links{display:none;gap:28px}
+@media(min-width:1024px){.nav-links{display:flex;align-items:center}}
+.nav-links a{
+  font-size:14px; color:#D4D4D8; transition:color .2s;
+  position:relative; padding:4px 0;
+}
+.nav-links a:hover{color:var(--gold-200)}
+.nav-links a::after{
+  content:""; position:absolute; bottom:-4px; left:0; right:auto;
+  height:1px; background:var(--gold-400); width:0; transition:width .3s;
+}
+.nav-links a:hover::after{width:100%}
+
+.nav-cta{display:none}
+@media(min-width:1024px){.nav-cta{display:inline-flex}}
+.nav-cta .btn{padding:10px 20px;font-size:13px}
+
+.menu-btn{display:inline-flex;padding:8px;color:#E4E4E7}
+@media(min-width:1024px){.menu-btn{display:none}}
+
+.mobile-menu{
+  display:none;
+  background-color:#05060A;
+  background-image:linear-gradient(180deg,rgba(5,6,10,.97),rgba(5,6,10,.97));
+  -webkit-backdrop-filter:blur(16px);
+  backdrop-filter:blur(16px);
+  border-top:1px solid rgba(212,162,74,.1);
+}
+.mobile-menu.open{display:block}
+.mobile-menu-inner{padding:16px 20px}
+.mobile-menu a{
+  display:block; padding:12px; border-radius:8px;
+  color:#D4D4D8; transition:all .2s;
+}
+.mobile-menu a:hover{background:rgba(212,162,74,.1);color:var(--gold-200)}
+.mobile-menu .btn{display:flex;width:100%;margin-top:12px}
+
+/* ============ Logo ============ */
+.logo{display:flex;align-items:center;gap:12px}
+.logo-text-main{
+  font-family:"Noto Serif TC",serif; font-weight:700;
+  font-size:16px; letter-spacing:.02em; white-space:nowrap;
+}
+@media(min-width:768px){.logo-text-main{font-size:18px}}
+.logo-text-main .sep{margin:0 6px;color:rgba(212,162,74,.6)}
+.logo-text-sub{
+  font-size:9px; letter-spacing:.32em;
+  font-family:"JetBrains Mono",monospace;
+  color:rgba(245,216,138,.6); margin-top:2px;
+}
+@media(min-width:768px){.logo-text-sub{font-size:10px}}
+
+/* ============ Hero ============ */
+.hero{padding:112px 0 80px;position:relative;overflow:hidden}
+@media(min-width:768px){.hero{padding:128px 0 112px}}
+.hero-grid{
+  display:grid; gap:40px; align-items:center;
+}
+@media(min-width:1024px){.hero-grid{grid-template-columns:1.4fr 1fr;gap:56px}}
+
+.hero h1{
+  font-family:"Noto Serif TC",serif; font-weight:900;
+  font-size:40px; line-height:1.1; letter-spacing:-.02em;
+  margin-top:24px;
+}
+@media(min-width:768px){.hero h1{font-size:64px}}
+@media(min-width:1280px){.hero h1{font-size:72px}}
+.hero h1 .line-1{display:block;color:#fff}
+.hero h1 .line-2{display:block;margin-top:8px}
+
+.hero-sub{
+  margin-top:24px; font-size:15px; color:#A1A1AA;
+  line-height:1.75; white-space:pre-line; max-width:560px;
+}
+@media(min-width:768px){.hero-sub{font-size:17px}}
+
+.hero-cta{margin-top:36px;display:flex;gap:12px;flex-wrap:wrap}
+.hero-cta .btn{flex:1;min-width:200px}
+@media(min-width:480px){.hero-cta .btn{flex:initial}}
+
+.hero-meta{
+  margin-top:40px; display:flex; flex-wrap:wrap;
+  align-items:center; gap:16px;
+  font-size:11px; letter-spacing:.18em;
+  font-family:"JetBrains Mono",monospace; color:#71717A;
+}
+.hero-meta .live{display:flex;align-items:center;gap:8px;white-space:nowrap}
+.hero-meta .live span{width:6px;height:6px;border-radius:50%;background:#34D399;animation:pulse 2s infinite}
+
+/* 浮動光點 */
+.glow-dot{position:absolute;border-radius:50%;animation:pulse 3s infinite}
+.glow-dot.d1{top:128px;left:40px;width:8px;height:8px;background:var(--gold-400);box-shadow:0 0 20px rgba(212,162,74,.8)}
+.glow-dot.d2{top:256px;right:80px;width:6px;height:6px;background:var(--cyan);box-shadow:0 0 15px rgba(34,211,238,.8);animation-delay:1s}
+.glow-dot.d3{bottom:160px;left:33%;width:4px;height:4px;background:var(--purple);box-shadow:0 0 15px rgba(168,85,247,.8);animation-delay:2s}
+
+/* 儀表板 */
+.dashboard{padding:24px}
+.dash-head{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:16px}
+.dash-head .label{font-size:10px;letter-spacing:.25em;font-family:"JetBrains Mono",monospace;color:rgba(245,216,138,.7)}
+.dash-head .title{font-size:14px;color:#fff;margin-top:2px}
+.dash-head .phase-no{text-align:right}
+.dash-head .phase-no .small{font-size:9px;font-family:"JetBrains Mono",monospace;color:#71717A}
+.dash-head .phase-no .big{font-family:"Noto Serif TC",serif;font-size:20px;font-weight:700;color:var(--gold-400)}
+
+.score-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.score-card{
+  padding:14px; border-radius:12px;
+  background-color:#0A0C14;
+  background-image:linear-gradient(180deg,rgba(10,12,20,.85),rgba(10,12,20,.85));
+  -webkit-backdrop-filter:blur(8px);
+  backdrop-filter:blur(8px);
+  border:1px solid;
+}
+.score-card.c-cyan{border-color:rgba(34,211,238,.3)}
+.score-card.c-orange{border-color:rgba(245,158,11,.3)}
+.score-card.c-green{border-color:rgba(34,197,94,.3)}
+.score-card.c-purple{border-color:rgba(168,85,247,.3)}
+
+.score-card-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.score-icon{
+  width:26px;height:26px;border-radius:6px;
+  display:inline-flex;align-items:center;justify-content:center;
+}
+.c-cyan .score-icon{background:rgba(34,211,238,.1);color:var(--cyan)}
+.c-orange .score-icon{background:rgba(245,158,11,.1);color:var(--orange)}
+.c-green .score-icon{background:rgba(34,197,94,.1);color:var(--green)}
+.c-purple .score-icon{background:rgba(168,85,247,.1);color:var(--purple)}
+
+.score-en{font-size:9px;letter-spacing:.18em;font-family:"JetBrains Mono",monospace;color:#71717A}
+.score-label{font-size:11px;color:#A1A1AA;margin-bottom:4px}
+.score-value{font-family:"Noto Serif TC",serif;font-size:32px;font-weight:700;line-height:1;font-variant-numeric:tabular-nums;transition:text-shadow .25s ease, transform .25s ease;display:inline-block}
+.c-cyan .score-value{color:var(--cyan)}
+.c-orange .score-value{color:var(--orange)}
+.c-green .score-value{color:var(--green)}
+.c-purple .score-value{color:var(--purple)}
+
+.score-bar{margin-top:10px;height:4px;border-radius:2px;background:var(--ink-700);overflow:hidden;position:relative}
+.score-bar > div{height:100%;border-radius:2px;width:0;transition:width 1.2s ease-out}
+.c-cyan .score-bar > div{background:linear-gradient(90deg,#0891B2,#22D3EE)}
+.c-orange .score-bar > div{background:linear-gradient(90deg,#D97706,#F59E0B)}
+.c-green .score-bar > div{background:linear-gradient(90deg,#16A34A,#22C55E)}
+.c-purple .score-bar > div{background:linear-gradient(90deg,#9333EA,#A855F7)}
+
+.dash-foot{
+  margin-top:16px;
+  display:flex; justify-content:space-between; align-items:center;
+  font-size:10px; font-family:"JetBrains Mono",monospace; color:#71717A;
+}
+.dash-foot .live{display:flex;align-items:center;gap:6px}
+.dash-foot .live span{width:4px;height:4px;border-radius:50%;background:var(--cyan);animation:pulse 2s infinite}
+
+/* 掃描線 */
+.scanline{position:absolute;inset:0;border-radius:inherit;overflow:hidden;pointer-events:none}
+.scanline::before{
+  content:""; position:absolute; left:0; right:0; height:2px;
+  background:linear-gradient(90deg,transparent,rgba(34,211,238,.5),transparent);
+  animation:scan 4s linear infinite;
+}
+@keyframes scan{0%{top:0;opacity:0}10%{opacity:1}90%{opacity:1}100%{top:100%;opacity:0}}
+
+/* ============ Philosophy ============ */
+.philo-grid{display:grid;gap:16px;margin-bottom:48px}
+@media(min-width:768px){.philo-grid{grid-template-columns:1fr 1fr;gap:20px}}
+.philo-item{
+  display:flex;gap:14px;padding:18px;
+  border:1px solid rgba(212,162,74,.15);
+  background:rgba(10,12,20,.4); border-radius:12px;
+  transition:all .3s;
+}
+.philo-item:hover{border-color:rgba(212,162,74,.4);background:rgba(15,18,28,.6)}
+.philo-num{
+  flex-shrink:0; width:26px; height:26px; border-radius:50%;
+  background:rgba(212,162,74,.1); border:1px solid rgba(212,162,74,.3);
+  display:flex; align-items:center; justify-content:center;
+  font-size:10px; font-family:"JetBrains Mono",monospace; color:var(--gold-400);
+  margin-top:1px;
+}
+.philo-text{color:#E4E4E7;font-size:14px;line-height:1.7}
+
+.philo-out{padding:36px 24px;text-align:center}
+@media(min-width:768px){.philo-out{padding:40px}}
+.philo-out .head{font-size:10px;letter-spacing:.3em;font-family:"JetBrains Mono",monospace;color:rgba(245,216,138,.7);margin-bottom:8px}
+.philo-out h3{font-family:"Noto Serif TC",serif;font-size:20px;color:#fff;font-weight:700;margin-bottom:24px}
+@media(min-width:768px){.philo-out h3{font-size:24px}}
+.philo-out-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(min-width:768px){.philo-out-grid{grid-template-columns:repeat(4,1fr);gap:16px}}
+.philo-out-card{
+  padding:16px;border-radius:8px;
+  background:rgba(10,12,20,.6);
+  border:1px solid rgba(212,162,74,.15);
+  text-align:center;
+}
+.philo-out-card svg{width:20px;height:20px;color:var(--gold-400);margin:0 auto 8px}
+.philo-out-card p{font-size:13px;color:#E4E4E7;font-weight:500}
+
+/* ============ Phases ============ */
+.phases-grid{display:grid;gap:20px}
+@media(min-width:640px){.phases-grid{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:1024px){.phases-grid{grid-template-columns:repeat(3,1fr);gap:24px}}
+
+.phase-card{padding:26px;transition:all .5s;border-radius:16px}
+.phase-card:hover{transform:translateY(-4px)}
+
+.phase-head{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:20px}
+.phase-icon{
+  position:relative; width:56px; height:56px; border-radius:12px;
+  display:flex; align-items:center; justify-content:center;
+  border:1px solid;
+}
+.phase-no-badge{
+  position:absolute;top:-8px;right:-8px;
+  padding:2px 6px;border-radius:6px;
+  background:var(--ink-900);border:1px solid #3F3F46;
+  font-family:"JetBrains Mono",monospace;font-size:10px;color:#D4D4D8;
+}
+.phase-meta{text-align:right}
+.phase-meta .en{font-size:10px;letter-spacing:.2em;font-family:"JetBrains Mono",monospace;color:#71717A}
+.phase-meta .id{font-size:10px;font-family:"JetBrains Mono",monospace;margin-top:4px}
+
+.phase-cn{font-family:"Noto Serif TC",serif;font-size:26px;font-weight:700;color:#fff;margin-bottom:8px}
+@media(min-width:768px){.phase-cn{font-size:30px}}
+.phase-status{font-size:13px;color:#A1A1AA;line-height:1.6;margin-bottom:20px;min-height:56px}
+
+.phase-strategy{padding:14px;border-radius:10px;margin-bottom:16px;border:1px solid}
+.phase-strategy-head{display:flex;justify-content:space-between;align-items:center}
+.phase-strategy-head .label{font-size:10px;letter-spacing:.2em;font-family:"JetBrains Mono",monospace;color:#A1A1AA}
+.phase-strategy-name{font-family:"Noto Serif TC",serif;font-size:18px;font-weight:700;margin-top:4px}
+
+.phase-actions{margin-bottom:16px}
+.phase-actions .label{font-size:10px;letter-spacing:.2em;font-family:"JetBrains Mono",monospace;color:#71717A;margin-bottom:8px;display:block}
+.phase-tags{display:flex;flex-wrap:wrap;gap:6px}
+.phase-tag{
+  font-size:11px;padding:4px 8px;border-radius:6px;
+  background:rgba(10,12,20,.8); border:1px solid; color:#D4D4D8;
+}
+
+.phase-quote{
+  padding-top:16px; border-top:1px solid rgba(63,63,70,.5);
+  display:flex; gap:8px;
+}
+.phase-quote svg{width:14px;height:14px;flex-shrink:0;margin-top:2px;opacity:.6}
+.phase-quote p{font-size:12px;color:#A1A1AA;line-height:1.6;font-style:italic}
+
+/* phase 顏色變體 */
+.p-cyan .phase-icon{background:rgba(34,211,238,.1);border-color:rgba(34,211,238,.3);color:var(--cyan)}
+.p-cyan .phase-meta .id,.p-cyan .phase-strategy-name,.p-cyan .phase-quote svg{color:var(--cyan)}
+.p-cyan .phase-strategy{background:rgba(34,211,238,.1);border-color:rgba(34,211,238,.3)}
+.p-cyan .phase-tag{border-color:rgba(34,211,238,.3)}
+.p-cyan:hover{box-shadow:0 0 32px rgba(34,211,238,.2)}
+
+.p-gold .phase-icon{background:rgba(245,158,11,.1);border-color:rgba(245,158,11,.3);color:var(--gold-400)}
+.p-gold .phase-meta .id,.p-gold .phase-strategy-name,.p-gold .phase-quote svg{color:var(--gold-400)}
+.p-gold .phase-strategy{background:rgba(245,158,11,.1);border-color:rgba(245,158,11,.3)}
+.p-gold .phase-tag{border-color:rgba(245,158,11,.3)}
+.p-gold:hover{box-shadow:0 0 32px rgba(212,162,74,.25)}
+
+.p-blue .phase-icon{background:rgba(59,130,246,.1);border-color:rgba(59,130,246,.3);color:#7DD3FC}
+.p-blue .phase-meta .id,.p-blue .phase-strategy-name,.p-blue .phase-quote svg{color:#7DD3FC}
+.p-blue .phase-strategy{background:rgba(59,130,246,.1);border-color:rgba(59,130,246,.3)}
+.p-blue .phase-tag{border-color:rgba(59,130,246,.3)}
+.p-blue:hover{box-shadow:0 0 32px rgba(59,130,246,.2)}
+
+.p-green .phase-icon{background:rgba(34,197,94,.1);border-color:rgba(34,197,94,.3);color:#6EE7B7}
+.p-green .phase-meta .id,.p-green .phase-strategy-name,.p-green .phase-quote svg{color:#6EE7B7}
+.p-green .phase-strategy{background:rgba(34,197,94,.1);border-color:rgba(34,197,94,.3)}
+.p-green .phase-tag{border-color:rgba(34,197,94,.3)}
+.p-green:hover{box-shadow:0 0 32px rgba(34,197,94,.2)}
+
+.p-lime .phase-icon{background:rgba(132,204,22,.1);border-color:rgba(132,204,22,.3);color:#BEF264}
+.p-lime .phase-meta .id,.p-lime .phase-strategy-name,.p-lime .phase-quote svg{color:#BEF264}
+.p-lime .phase-strategy{background:rgba(132,204,22,.1);border-color:rgba(132,204,22,.3)}
+.p-lime .phase-tag{border-color:rgba(132,204,22,.3)}
+.p-lime:hover{box-shadow:0 0 32px rgba(132,204,22,.25)}
+
+.p-purple .phase-icon{background:rgba(168,85,247,.1);border-color:rgba(168,85,247,.3);color:#C4B5FD}
+.p-purple .phase-meta .id,.p-purple .phase-strategy-name,.p-purple .phase-quote svg{color:#C4B5FD}
+.p-purple .phase-strategy{background:rgba(168,85,247,.1);border-color:rgba(168,85,247,.3)}
+.p-purple .phase-tag{border-color:rgba(168,85,247,.3)}
+.p-purple:hover{box-shadow:0 0 32px rgba(168,85,247,.2)}
+
+/* ============ Scores ============ */
+.scores-grid{display:grid;gap:20px;margin-bottom:48px}
+@media(min-width:640px){.scores-grid{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:1024px){.scores-grid{grid-template-columns:repeat(4,1fr)}}
+.score-card-big{padding:24px;border-radius:16px;transition:all .3s}
+.score-card-big:hover{transform:translateY(-4px)}
+.score-card-big .head{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}
+.score-card-big .icon-box{
+  width:44px;height:44px;border-radius:12px;
+  display:flex;align-items:center;justify-content:center;border:1px solid;
+}
+.score-card-big .label{font-size:14px;color:#D4D4D8;margin-bottom:4px}
+.score-card-big .value-row{display:flex;align-items:baseline;gap:6px;margin-bottom:16px}
+.score-card-big .value{font-family:"Noto Serif TC",serif;font-size:48px;font-weight:700;line-height:1;font-variant-numeric:tabular-nums}
+.score-card-big .unit{font-size:12px;font-family:"JetBrains Mono",monospace;color:#52525B}
+.score-card-big .bar{height:6px;border-radius:3px;background:var(--ink-700);overflow:hidden;margin-bottom:16px}
+.score-card-big .bar > div{height:100%;width:0;border-radius:3px;transition:width 1.4s ease-out}
+.score-card-big .desc{font-size:12px;color:#A1A1AA;line-height:1.7}
+
+.score-card-big.c-cyan .icon-box{background:rgba(34,211,238,.1);border-color:rgba(34,211,238,.3);color:var(--cyan)}
+.score-card-big.c-cyan .value{color:var(--cyan)} .score-card-big.c-cyan .bar > div{background:linear-gradient(90deg,#0891B2,#22D3EE)}
+.score-card-big.c-cyan:hover{box-shadow:0 0 32px rgba(34,211,238,.2)}
+
+.score-card-big.c-orange .icon-box{background:rgba(245,158,11,.1);border-color:rgba(245,158,11,.3);color:var(--orange)}
+.score-card-big.c-orange .value{color:var(--orange)} .score-card-big.c-orange .bar > div{background:linear-gradient(90deg,#D97706,#F59E0B)}
+.score-card-big.c-orange:hover{box-shadow:0 0 32px rgba(245,158,11,.2)}
+
+.score-card-big.c-green .icon-box{background:rgba(34,197,94,.1);border-color:rgba(34,197,94,.3);color:#6EE7B7}
+.score-card-big.c-green .value{color:#6EE7B7} .score-card-big.c-green .bar > div{background:linear-gradient(90deg,#16A34A,#22C55E)}
+.score-card-big.c-green:hover{box-shadow:0 0 32px rgba(34,197,94,.2)}
+
+.score-card-big.c-purple .icon-box{background:rgba(168,85,247,.1);border-color:rgba(168,85,247,.3);color:#C4B5FD}
+.score-card-big.c-purple .value{color:#C4B5FD} .score-card-big.c-purple .bar > div{background:linear-gradient(90deg,#9333EA,#A855F7)}
+.score-card-big.c-purple:hover{box-shadow:0 0 32px rgba(168,85,247,.2)}
+
+.scores-summary{padding:28px;text-align:center}
+.scores-summary .label{font-size:10px;letter-spacing:.3em;font-family:"JetBrains Mono",monospace;color:rgba(245,216,138,.7);margin-bottom:8px}
+.scores-summary p{font-size:16px;color:#E4E4E7}
+@media(min-width:768px){.scores-summary p{font-size:18px}}
+
+/* ============ Pricing ============ */
+.pricing-grid{display:grid;gap:20px;margin-bottom:32px}
+@media(min-width:1024px){.pricing-grid{grid-template-columns:repeat(3,1fr);gap:24px}}
+
+.plan{padding:30px;border-radius:16px;transition:all .3s;position:relative}
+.plan:hover{transform:translateY(-4px)}
+.plan.featured{
+  border:2px solid rgba(212,162,74,.6);
+  box-shadow:0 0 48px rgba(212,162,74,.18);
+}
+.plan-badge{
+  position:absolute; top:-14px; left:50%; transform:translateX(-50%);
+  padding:4px 14px; border-radius:999px;
+  background:linear-gradient(90deg,var(--gold-400),var(--gold-600));
+  color:var(--ink-950); font-size:11px; font-weight:700; letter-spacing:.1em;
+  display:flex; align-items:center; gap:6px;
+  box-shadow:0 0 20px rgba(212,162,74,.4);
+}
+
+.plan-head{text-align:center;margin-bottom:24px}
+.plan-tier{font-size:12px;letter-spacing:.2em;font-family:"JetBrains Mono",monospace;margin-bottom:8px}
+.plan.tier-cyan .plan-tier{color:var(--cyan)}
+.plan.tier-gold .plan-tier{color:var(--gold-400)}
+.plan.tier-green .plan-tier{color:#6EE7B7}
+.plan-name{font-family:"Noto Serif TC",serif;font-size:24px;font-weight:700;color:#fff;margin-bottom:8px}
+@media(min-width:768px){.plan-name{font-size:28px}}
+.plan-target{font-size:12px;color:#71717A;margin-top:8px}
+
+.plan-price{text-align:center;padding-bottom:24px;border-bottom:1px solid #27272A;margin-bottom:24px}
+.plan-price .price{font-family:"Noto Serif TC",serif;font-size:40px;font-weight:900;line-height:1}
+@media(min-width:768px){.plan-price .price{font-size:48px}}
+.plan.tier-cyan .plan-price .price{color:var(--cyan)}
+.plan.tier-gold .plan-price .price{
+  background:linear-gradient(135deg,#F5D88A 0%,#D4A24A 50%,#B68637 100%);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.plan.tier-green .plan-price .price{color:#6EE7B7}
+.plan-price .note{font-size:12px;color:#71717A;margin-top:4px}
+
+.plan-items{margin-bottom:24px;min-height:192px}
+.plan-items li{display:flex;gap:10px;font-size:14px;color:#D4D4D8;margin-bottom:10px;line-height:1.6}
+.plan-items li svg{flex-shrink:0;margin-top:3px;width:14px;height:14px}
+.plan.tier-cyan .plan-items li svg{color:var(--cyan)}
+.plan.tier-gold .plan-items li svg{color:var(--gold-400)}
+.plan.tier-green .plan-items li svg{color:#6EE7B7}
+
+.plan-copy{font-size:12px;color:#71717A;font-style:italic;line-height:1.7;margin-bottom:24px;min-height:48px}
+.plan .btn{width:100%}
+
+/* 長期方案 */
+.longterm{padding:32px;border-radius:16px;border:1px solid rgba(168,85,247,.3)}
+.longterm-grid{display:grid;gap:24px}
+@media(min-width:768px){.longterm-grid{grid-template-columns:2fr 3fr;gap:32px}}
+.longterm-meta .head{display:flex;align-items:center;gap:8px;margin-bottom:12px}
+.longterm-meta .head .icon{
+  width:40px;height:40px;border-radius:12px;
+  background:rgba(168,85,247,.15);border:1px solid rgba(168,85,247,.4);
+  display:flex;align-items:center;justify-content:center;color:#C4B5FD;
+}
+.longterm-meta .tier{font-size:12px;letter-spacing:.2em;font-family:"JetBrains Mono",monospace;color:#C4B5FD}
+.longterm-meta .name{font-family:"Noto Serif TC",serif;font-size:26px;font-weight:700;color:#fff;margin-bottom:8px}
+.longterm-meta .price{font-family:"Noto Serif TC",serif;font-size:36px;font-weight:900;color:#C4B5FD;line-height:1}
+.longterm-meta .note{font-size:14px;color:#71717A;margin-left:4px}
+.longterm-meta .copy{font-size:14px;color:#A1A1AA;line-height:1.7;margin-top:16px}
+.longterm-meta .btn{margin-top:24px}
+
+.longterm-detail{padding-left:0}
+@media(min-width:768px){.longterm-detail{border-left:1px solid #27272A;padding-left:32px}}
+.longterm-detail .label{font-size:12px;letter-spacing:.2em;font-family:"JetBrains Mono",monospace;color:#71717A;margin-bottom:12px;display:block}
+.longterm-detail ul{display:grid;gap:10px}
+@media(min-width:640px){.longterm-detail ul{grid-template-columns:1fr 1fr}}
+.longterm-detail li{display:flex;gap:10px;font-size:14px;color:#D4D4D8}
+.longterm-detail li svg{flex-shrink:0;margin-top:3px;width:14px;height:14px;color:#C4B5FD}
+.longterm-detail .target-box{
+  margin-top:20px;padding:12px;border-radius:8px;
+  background:rgba(168,85,247,.05);border:1px solid rgba(168,85,247,.2);
+  font-size:12px;color:#A1A1AA;font-style:italic;
+  display:flex;gap:8px;
+}
+.longterm-detail .target-box svg{width:14px;height:14px;color:#C4B5FD;flex-shrink:0;margin-top:2px}
+
+/* ============ Process ============ */
+.process-step{position:relative;display:flex;gap:20px;padding-bottom:32px}
+@media(min-width:768px){.process-step{gap:24px;padding-bottom:40px}}
+.process-step:last-child{padding-bottom:0}
+.process-num-col{display:flex;flex-direction:column;align-items:center}
+.process-num{
+  position:relative; width:48px; height:48px; border-radius:12px;
+  background:var(--ink-800); border:1px solid rgba(212,162,74,.4);
+  display:flex; align-items:center; justify-content:center;
+  font-family:"Noto Serif TC",serif; font-size:16px; font-weight:700;
+  flex-shrink:0;
+  box-shadow:0 0 24px rgba(212,162,74,.25);
+}
+@media(min-width:768px){.process-num{width:56px;height:56px;font-size:18px}}
+.process-num span{
+  background:linear-gradient(135deg,#F5D88A 0%,#D4A24A 50%,#B68637 100%);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.process-line{flex:1;width:1px;background:linear-gradient(180deg,rgba(212,162,74,.4),transparent);min-height:32px;margin:8px 0}
+.process-content{flex:1;padding-top:8px}
+.process-meta{display:flex;align-items:center;gap:8px;margin-bottom:6px}
+.process-meta .step{font-size:10px;letter-spacing:.22em;font-family:"JetBrains Mono",monospace;color:rgba(245,216,138,.7)}
+.process-meta .hr{flex:1;height:1px;background:#27272A}
+.process-content h3{font-family:"Noto Serif TC",serif;font-size:18px;font-weight:700;color:#fff;margin-bottom:8px}
+@media(min-width:768px){.process-content h3{font-size:20px}}
+.process-content p{font-size:14px;color:#A1A1AA;line-height:1.7;max-width:600px}
+
+/* ============ Audience ============ */
+.audience-grid{display:grid;gap:20px}
+@media(min-width:768px){.audience-grid{grid-template-columns:1fr 1fr;gap:24px}}
+.audience-card{padding:24px;border-radius:16px}
+.audience-head{display:flex;align-items:center;gap:8px;margin-bottom:20px}
+.audience-head .icon{
+  width:36px;height:36px;border-radius:8px;
+  display:flex;align-items:center;justify-content:center;border:1px solid;
+}
+.audience-head.fit .icon{background:rgba(34,197,94,.1);border-color:rgba(34,197,94,.3);color:#6EE7B7}
+.audience-head.notfit .icon{background:rgba(244,63,94,.1);border-color:rgba(244,63,94,.3);color:#FCA5A5}
+.audience-head .label{font-size:10px;letter-spacing:.22em;font-family:"JetBrains Mono",monospace}
+.audience-head.fit .label{color:#6EE7B7}
+.audience-head.notfit .label{color:#FCA5A5}
+.audience-head .title{font-size:18px;font-weight:700;color:#fff}
+.audience-card ul li{display:flex;gap:10px;font-size:14px;line-height:1.6;margin-bottom:12px}
+.audience-card.fit li{color:#E4E4E7}
+.audience-card.fit li svg{color:#6EE7B7;flex-shrink:0;margin-top:5px}
+.audience-card.notfit li{color:#A1A1AA}
+.audience-card.notfit li svg{color:rgba(252,165,165,.6);flex-shrink:0;margin-top:5px}
+
+/* ============ Compare ============ */
+.compare-grid{display:grid;gap:0}
+@media(min-width:768px){.compare-grid{grid-template-columns:1fr 1fr;gap:20px}}
+.compare-trad{
+  padding:28px;border-radius:16px;
+  background:rgba(10,12,20,.5);border:1px solid #27272A;
+}
+@media(min-width:768px){.compare-trad{border-radius:16px 0 0 16px}}
+.compare-trad .label{font-size:10px;letter-spacing:.25em;font-family:"JetBrains Mono",monospace;color:#71717A;margin-bottom:12px}
+.compare-trad h3{font-family:"Noto Serif TC",serif;font-size:24px;font-weight:700;color:#71717A;margin-bottom:24px}
+.compare-trad li{display:flex;align-items:center;gap:12px;color:#71717A;margin-bottom:12px}
+.compare-trad li .dot{width:4px;height:4px;border-radius:50%;background:#52525B}
+.compare-trad li .text{text-decoration:line-through;text-decoration-color:rgba(63,63,70,.6)}
+
+.compare-ours{
+  padding:28px;border-radius:16px;
+  margin-top:-12px;
+  border:1px solid rgba(212,162,74,.4);
+  box-shadow:0 0 48px rgba(212,162,74,.15);
+}
+@media(min-width:768px){.compare-ours{margin-top:0;border-radius:0 16px 16px 0;margin-left:-1px}}
+.compare-ours .label{font-size:10px;letter-spacing:.25em;font-family:"JetBrains Mono",monospace;color:rgba(245,216,138,.8);margin-bottom:12px}
+.compare-ours h3{font-family:"Noto Serif TC",serif;font-size:24px;font-weight:700;margin-bottom:24px}
+.compare-ours li{display:flex;align-items:center;gap:12px;color:#F4F4F5;margin-bottom:12px}
+.compare-ours li svg{width:16px;height:16px;color:var(--gold-400)}
+
+.compare-outro{margin-top:48px;text-align:center}
+.compare-outro p{font-family:"Noto Serif TC",serif;font-size:20px;font-weight:700;line-height:1.7}
+@media(min-width:768px){.compare-outro p{font-size:24px}}
+.compare-outro .line1{color:#fff}
+.compare-outro .line2{display:block;margin-top:8px}
+
+/* ============ Story ============ */
+.story-content{max-width:768px;margin:0 auto}
+.story-content .badge{margin-bottom:24px}
+.story-content h2{
+  font-family:"Noto Serif TC",serif;font-weight:700;
+  font-size:30px;line-height:1.2;margin-bottom:32px;
+}
+@media(min-width:768px){.story-content h2{font-size:48px}}
+.story-content h2 .l1{color:#fff;display:block}
+.story-content h2 .l2{display:block;margin-top:4px}
+.story-content p{font-size:15px;color:#D4D4D8;line-height:1.8;margin-bottom:16px}
+@media(min-width:768px){.story-content p{font-size:17px}}
+
+/* ============ FAQ ============ */
+.faq-list{max-width:768px;margin:0 auto;display:flex;flex-direction:column;gap:12px}
+.faq-item{
+  border:1px solid #27272A; border-radius:12px;
+  background:rgba(10,12,20,.4); overflow:hidden;
+  transition:all .3s;
+}
+.faq-item.open{
+  border-color:rgba(212,162,74,.4);
+  background:rgba(15,18,28,.6);
+  box-shadow:0 0 24px rgba(212,162,74,.15);
+}
+.faq-item:hover:not(.open){border-color:rgba(212,162,74,.2)}
+.faq-q{
+  width:100%;display:flex;justify-content:space-between;align-items:center;
+  gap:16px;padding:20px 24px;text-align:left;
+}
+.faq-q-left{display:flex;gap:12px;align-items:flex-start}
+.faq-q-num{
+  font-size:10px;letter-spacing:.2em;font-family:"JetBrains Mono",monospace;
+  color:rgba(245,216,138,.8); margin-top:5px; flex-shrink:0;
+}
+.faq-q-text{font-size:15px;font-weight:500;color:#F4F4F5}
+@media(min-width:768px){.faq-q-text{font-size:17px}}
+.faq-item.open .faq-q-text{color:var(--gold-200)}
+.faq-toggle{
+  flex-shrink:0;width:32px;height:32px;border-radius:50%;
+  border:1px solid #3F3F46;display:flex;align-items:center;justify-content:center;
+  transition:all .3s;
+}
+.faq-item.open .faq-toggle{border-color:rgba(212,162,74,.5);background:rgba(212,162,74,.1)}
+.faq-toggle svg{width:14px;height:14px;color:#A1A1AA;transition:transform .3s}
+.faq-item.open .faq-toggle svg{color:var(--gold-400)}
+
+.faq-a{
+  display:none; padding:0 24px 24px 56px;
+}
+.faq-item.open .faq-a{display:block}
+.faq-a .hr{height:1px;background:linear-gradient(90deg,rgba(212,162,74,.3),transparent);margin-bottom:16px}
+.faq-a p{font-size:14px;color:#A1A1AA;line-height:1.8}
+@media(min-width:768px){.faq-a p{font-size:15px}}
+
+/* ============ Final CTA ============ */
+.final-cta{padding:96px 0 128px;position:relative;text-align:center;overflow:hidden}
+.final-cta::before{
+  content:"";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  width:800px;height:800px;border-radius:50%;
+  background:rgba(212,162,74,.05);filter:blur(80px);pointer-events:none;
+}
+.final-cta::after{
+  content:"";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  width:500px;height:500px;border-radius:50%;
+  background:rgba(34,211,238,.05);filter:blur(80px);pointer-events:none;
+}
+.final-cta .badge{margin-bottom:24px}
+.final-cta h2{
+  font-family:"Noto Serif TC",serif;font-weight:900;color:#fff;
+  font-size:32px;line-height:1.2;margin-bottom:24px;
+}
+@media(min-width:768px){.final-cta h2{font-size:56px}}
+.final-cta .sub{
+  color:#A1A1AA;font-size:16px;line-height:1.7;white-space:pre-line;margin-bottom:40px;
+}
+@media(min-width:768px){.final-cta .sub{font-size:20px}}
+.final-cta .actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:48px}
+.final-cta .tags{
+  display:flex;align-items:center;justify-content:center;gap:24px;
+  font-size:11px;letter-spacing:.22em;font-family:"JetBrains Mono",monospace;color:#52525B;
+  flex-wrap:wrap;
+}
+.final-cta .tags .gold{color:rgba(245,216,138,.8)}
+.final-cta .tags .dot{width:4px;height:4px;border-radius:50%;background:#3F3F46}
+
+/* ============ Footer ============ */
+.footer{border-top:1px solid rgba(212,162,74,.1);background:var(--ink-950);position:relative;z-index:1}
+.footer-inner{padding:56px 0}
+.footer-grid{display:grid;gap:32px}
+@media(min-width:768px){.footer-grid{grid-template-columns:2fr 1fr;gap:40px}}
+.footer-brand{max-width:480px}
+.footer-tagline{margin-top:20px;font-size:14px;color:#A1A1AA;line-height:1.7}
+.footer-nav .label{font-size:10px;letter-spacing:.25em;font-family:"JetBrains Mono",monospace;color:rgba(245,216,138,.7);margin-bottom:12px;display:block}
+.footer-nav a{display:block;font-size:14px;color:#A1A1AA;padding:4px 0;transition:color .2s}
+.footer-nav a:hover{color:var(--gold-200)}
+.footer-bottom{
+  margin-top:40px;padding-top:24px;border-top:1px solid rgba(63,63,70,.5);
+  display:flex;flex-direction:column;gap:8px;
+  font-size:11px;font-family:"JetBrains Mono",monospace;
+}
+@media(min-width:768px){.footer-bottom{flex-direction:row;justify-content:space-between}}
+.footer-bottom .copyright{color:#52525B;letter-spacing:.05em}
+.footer-bottom .version{color:#3F3F46;letter-spacing:.2em}
+
+/* 進場淡入 */
+.fade-in{opacity:0;transform:translateY(20px);transition:opacity .6s ease, transform .6s ease}
+.fade-in.visible{opacity:1;transform:translateY(0)}
+</style>
+</head>
+<body>
+
+<!-- ====== Navbar ====== -->
+<header class="navbar" id="navbar">
+  <div class="navbar-inner">
+    <a href="file:///C:/Users/berne/Downloads/index_3.html#top" class="logo">
+      <svg width="40" height="40" viewBox="0 0 64 64" fill="none">
+        <defs>
+          <lineargradient id="goldGrad" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#F5D88A"></stop>
+            <stop offset="100%" stop-color="#B68637"></stop>
+          </lineargradient>
+        </defs>
+        <path d="M32 4 L54 17 L54 47 L32 60 L10 47 L10 17 Z" stroke="url(#goldGrad)" stroke-width="1.2" fill="rgba(212,162,74,0.04)"></path>
+        <path d="M32 12 L47 21 L47 43 L32 52 L17 43 L17 21 Z" stroke="url(#goldGrad)" stroke-width="0.6" opacity="0.4" fill="none"></path>
+        <g stroke="url(#goldGrad)" stroke-width="1.5" stroke-linecap="round" fill="none">
+          <line x1="32" y1="46" x2="32" y2="34"></line>
+          <line x1="32" y1="34" x2="24" y2="26"></line>
+          <line x1="32" y1="34" x2="40" y2="26"></line>
+          <line x1="24" y1="26" x2="20" y2="20"></line>
+          <line x1="24" y1="26" x2="26" y2="18"></line>
+          <line x1="40" y1="26" x2="38" y2="18"></line>
+          <line x1="40" y1="26" x2="44" y2="20"></line>
+        </g>
+        <g fill="#F5D88A">
+          <circle cx="32" cy="46" r="2.2"></circle><circle cx="32" cy="34" r="2"></circle>
+          <circle cx="24" cy="26" r="1.6"></circle><circle cx="40" cy="26" r="1.6"></circle>
+          <circle cx="20" cy="20" r="1.3"></circle><circle cx="26" cy="18" r="1.3"></circle>
+          <circle cx="38" cy="18" r="1.3"></circle><circle cx="44" cy="20" r="1.3"></circle>
+        </g>
+      </svg>
+      <div>
+        <div class="logo-text-main">
+          <span>科學八字</span><span class="sep">|</span><span class="gold-text">決策系統</span>
+        </div>
+        <div class="logo-text-sub">DECISION SYSTEM</div>
+      </div>
+    </a>
+
+    <nav class="nav-links">
+      <a href="file:///C:/Users/berne/Downloads/index_3.html#phases">六大決策期</a>
+      <a href="file:///C:/Users/berne/Downloads/index_3.html#scores">評估指標</a>
+      <a href="file:///C:/Users/berne/Downloads/index_3.html#pricing">服務方案</a>
+      <a href="file:///C:/Users/berne/Downloads/index_3.html#process">流程</a>
+      <a href="file:///C:/Users/berne/Downloads/index_3.html#faq">常見問題</a>
+    </nav>
+
+    <a href="file:///C:/Users/berne/Downloads/index_3.html#pricing" class="nav-cta">
+      <button class="btn btn-primary">立即預約</button>
+    </a>
+
+    <button class="menu-btn" id="menuBtn" aria-label="menu">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+        <line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line>
+      </svg>
+    </button>
+  </div>
+
+  <div class="mobile-menu" id="mobileMenu">
+    <div class="mobile-menu-inner">
+      <a href="file:///C:/Users/berne/Downloads/index_3.html#phases">六大決策期</a>
+      <a href="file:///C:/Users/berne/Downloads/index_3.html#scores">評估指標</a>
+      <a href="file:///C:/Users/berne/Downloads/index_3.html#pricing">服務方案</a>
+      <a href="file:///C:/Users/berne/Downloads/index_3.html#process">流程</a>
+      <a href="file:///C:/Users/berne/Downloads/index_3.html#faq">常見問題</a>
+      <a href="file:///C:/Users/berne/Downloads/index_3.html#pricing"><button class="btn btn-primary">立即預約</button></a>
+    </div>
+  </div>
+</header>
+
+<!-- ====== Hero ====== -->
+<section class="hero bg-techgrid" id="top">
+  <div class="glow-dot d1"></div>
+  <div class="glow-dot d2"></div>
+  <div class="glow-dot d3"></div>
+
+  <div class="container">
+    <div class="hero-grid">
+      <div>
+        <div class="badge">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 1l2.4 7.6L22 11l-7.6 2.4L12 21l-2.4-7.6L2 11l7.6-2.4z"></path></svg>
+          <span style="color:var(--gold-200);letter-spacing:.1em;font-family:&#39;Noto Sans TC&#39;,sans-serif">科學八字｜決策系統</span>
+        </div>
+
+        <h1>
+          <span class="line-1">我不算命，</span>
+          <span class="line-2 gold-text">我只優化你的決策品質。</span>
+        </h1>
+
+        <p class="hero-sub">人生的差距，本質是決策系統的差距。
+透過八字結構、決策週期與行動策略，幫你看清現在的位置，做出更準確的選擇。</p>
+
+        <div class="hero-cta">
+          <a href="file:///C:/Users/berne/Downloads/index_3.html#pricing"><button class="btn btn-primary">立即預約分析 →</button></a>
+          <a href="file:///C:/Users/berne/Downloads/index_3.html#pricing"><button class="btn btn-ghost">查看服務方案</button></a>
+        </div>
+
+        <div class="hero-meta">
+          <span class="live"><span></span>SYSTEM ONLINE</span>
+          <span style="color:#3F3F46">/</span>
+          <span style="font-size:10px">看錯狀態 · 才會一直做錯決策</span>
+        </div>
+      </div>
+
+      <!-- 儀表板 -->
+      <div class="glass hud dashboard">
+        <span class="hud-c1"></span><span class="hud-c2"></span>
+        <div class="scanline"></div>
+
+        <div class="dash-head">
+          <div>
+            <div class="label">DECISION DASHBOARD</div>
+            <div class="title">四維狀態評估</div>
+          </div>
+          <div class="phase-no">
+            <div class="small">PHASE</div>
+            <div class="big">04</div>
+          </div>
+        </div>
+
+        <div class="score-grid">
+          <div class="score-card c-cyan">
+            <div class="score-card-head">
+              <span class="score-icon">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
+              </span>
+              <span class="score-en">STRUCTURE</span>
+            </div>
+            <div class="score-label">結構分數</div>
+            <div class="score-value" id="score-structure" data-base="68" style="transition: text-shadow 0.2s, transform 0.2s;">68</div>
+            <div class="score-bar"><div data-w="68" id="bar-structure" style="width: 68%;"></div></div>
+          </div>
+
+          <div class="score-card c-orange">
+            <div class="score-card-head">
+              <span class="score-icon">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+              </span>
+              <span class="score-en">RISK</span>
+            </div>
+            <div class="score-label">風險分數</div>
+            <div class="score-value" id="score-risk" data-base="42" style="transition: text-shadow 0.2s, transform 0.2s;">40</div>
+            <div class="score-bar"><div data-w="42" id="bar-risk" style="width: 40%;"></div></div>
+          </div>
+
+          <div class="score-card c-green">
+            <div class="score-card-head">
+              <span class="score-icon">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+              </span>
+              <span class="score-en">ACTION</span>
+            </div>
+            <div class="score-label">行動分數</div>
+            <div class="score-value" id="score-action" data-base="71" style="transition: text-shadow 0.2s, transform 0.2s;">71</div>
+            <div class="score-bar"><div data-w="71" id="bar-action" style="width: 71%;"></div></div>
+          </div>
+
+          <div class="score-card c-purple">
+            <div class="score-card-head">
+              <span class="score-icon">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+              </span>
+              <span class="score-en">SUPPORT</span>
+            </div>
+            <div class="score-label">支援分數</div>
+            <div class="score-value" id="score-support" data-base="66" style="transition: text-shadow 0.2s, transform 0.2s;">63</div>
+            <div class="score-bar"><div data-w="66" id="bar-support" style="width: 63%;"></div></div>
+          </div>
+        </div>
+
+        <div class="dash-foot">
+          <span>DATA · ANALYSIS</span>
+          <span class="live"><span></span>LIVE</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== Philosophy ====== -->
+<section class="section">
+  <div class="container">
+    <div class="section-head">
+      <div class="badge"><span class="dot"></span>BRAND PHILOSOPHY</div>
+      <h2>你不是不努力，<br><span class="gold-text">你是用錯了決策系統。</span></h2>
+      <p class="sub">很多人一直努力，卻一直卡住。
+不是因為能力不夠，而是因為在錯的狀態下，做了錯的決策。</p>
+    </div>
+
+    <div class="philo-grid">
+      <div class="philo-item"><span class="philo-num">01</span><span class="philo-text">有些時候該修復，不該硬衝。</span></div>
+      <div class="philo-item"><span class="philo-num">02</span><span class="philo-text">有些時候該防守，不該冒進。</span></div>
+      <div class="philo-item"><span class="philo-num">03</span><span class="philo-text">有些時候該觀察，不該急著下注。</span></div>
+      <div class="philo-item"><span class="philo-num">04</span><span class="philo-text">有些時候該累積，不該急著證明。</span></div>
+      <div class="philo-item"><span class="philo-num">05</span><span class="philo-text">有些時候該攻擊，不該再猶豫。</span></div>
+      <div class="philo-item"><span class="philo-num">06</span><span class="philo-text">有些時候該轉換，不該停在原地。</span></div>
+    </div>
+
+    <div class="glass hud philo-out">
+      <span class="hud-c1"></span><span class="hud-c2"></span>
+      <div class="head">SYSTEM ANALYSIS</div>
+      <h3>這套系統不是告訴你「命好不好」。而是幫你判斷：</h3>
+      <div class="philo-out-grid">
+        <div class="philo-out-card">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+          <p>你現在在哪個階段？</p>
+        </div>
+        <div class="philo-out-card">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+          <p>你的優勢與限制在哪？</p>
+        </div>
+        <div class="philo-out-card">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+          <p>你該採取什麼策略？</p>
+        </div>
+        <div class="philo-out-card">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+          <p>你該避免什麼錯誤？</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== Six Phases ====== -->
+<section class="section section-bg-dots" id="phases">
+  <div class="container">
+    <div class="section-head">
+      <div class="badge"><span class="dot"></span>SIX DECISION PHASES</div>
+      <h2>六大決策期</h2>
+      <p class="sub">看清狀態，才能做對決定。你一定在其中一個階段 — 看錯狀態，才會一直做錯決策。</p>
+    </div>
+
+    <div class="phases-grid">
+      <!-- 01 修復期 -->
+      <div class="glass hud phase-card p-cyan">
+        <span class="hud-c1"></span><span class="hud-c2"></span>
+        <div class="phase-head">
+          <div class="phase-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+            <span class="phase-no-badge">01</span>
+          </div>
+          <div class="phase-meta">
+            <div class="en">RECOVERY PHASE</div>
+            <div class="id">PHASE · 01</div>
+          </div>
+        </div>
+        <h3 class="phase-cn">修復期</h3>
+        <p class="phase-status">系統正在修復，身心需要回到平衡，為下一階段累積能量。</p>
+        <div class="phase-strategy">
+          <div class="phase-strategy-head"><span class="label">CORE STRATEGY</span></div>
+          <div class="phase-strategy-name">修復整合</div>
+        </div>
+        <div class="phase-actions">
+          <span class="label">ACTION GUIDE</span>
+          <div class="phase-tags">
+            <span class="phase-tag">允許休息</span><span class="phase-tag">情緒書寫</span>
+            <span class="phase-tag">學習沉澱</span><span class="phase-tag">重新對齊</span>
+          </div>
+        </div>
+        <div class="phase-quote">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 21c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2h2c0 4-1 5-3 5v3zm12 0c3 0 7-1 7-8V5c0-1.25-.757-2.017-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2h2c0 4-1 5-3 5v3z"></path></svg>
+          <p>修復不是退後，而是為了走得更遠。</p>
+        </div>
+      </div>
+
+      <!-- 02 防守期 -->
+      <div class="glass hud phase-card p-gold">
+        <span class="hud-c1"></span><span class="hud-c2"></span>
+        <div class="phase-head">
+          <div class="phase-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+            <span class="phase-no-badge">02</span>
+          </div>
+          <div class="phase-meta"><div class="en">DEFENSE PHASE</div><div class="id">PHASE · 02</div></div>
+        </div>
+        <h3 class="phase-cn">防守期</h3>
+        <p class="phase-status">結構還不穩，不適合冒進，應先守住本金與現有資源。</p>
+        <div class="phase-strategy">
+          <div class="phase-strategy-head"><span class="label">CORE STRATEGY</span></div>
+          <div class="phase-strategy-name">只守不攻</div>
+        </div>
+        <div class="phase-actions">
+          <span class="label">ACTION GUIDE</span>
+          <div class="phase-tags">
+            <span class="phase-tag">減少操作</span><span class="phase-tag">控制風險</span>
+            <span class="phase-tag">觀察市場</span><span class="phase-tag">建立紀律</span>
+          </div>
+        </div>
+        <div class="phase-quote">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 21c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2h2c0 4-1 5-3 5v3zm12 0c3 0 7-1 7-8V5c0-1.25-.757-2.017-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2h2c0 4-1 5-3 5v3z"></path></svg>
+          <p>這個階段的重點不是賺多少，而是不能輸。</p>
+        </div>
+      </div>
+
+      <!-- 03 觀察期 -->
+      <div class="glass hud phase-card p-blue">
+        <span class="hud-c1"></span><span class="hud-c2"></span>
+        <div class="phase-head">
+          <div class="phase-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+            <span class="phase-no-badge">03</span>
+          </div>
+          <div class="phase-meta"><div class="en">OBSERVATION PHASE</div><div class="id">PHASE · 03</div></div>
+        </div>
+        <h3 class="phase-cn">觀察期</h3>
+        <p class="phase-status">局勢尚未完全明朗，應先看清趨勢、理解節奏、等待訊號。</p>
+        <div class="phase-strategy">
+          <div class="phase-strategy-head"><span class="label">CORE STRATEGY</span></div>
+          <div class="phase-strategy-name">看清再動</div>
+        </div>
+        <div class="phase-actions">
+          <span class="label">ACTION GUIDE</span>
+          <div class="phase-tags">
+            <span class="phase-tag">廣泛觀察</span><span class="phase-tag">分析驗證</span>
+            <span class="phase-tag">耐心等待</span><span class="phase-tag">靈活調整</span>
+          </div>
+        </div>
+        <div class="phase-quote">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 21c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2h2c0 4-1 5-3 5v3zm12 0c3 0 7-1 7-8V5c0-1.25-.757-2.017-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2h2c0 4-1 5-3 5v3z"></path></svg>
+          <p>先看懂，再決定；觀察得越準，出手才越狠。</p>
+        </div>
+      </div>
+
+      <!-- 04 累積期 -->
+      <div class="glass hud phase-card p-green">
+        <span class="hud-c1"></span><span class="hud-c2"></span>
+        <div class="phase-head">
+          <div class="phase-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg>
+            <span class="phase-no-badge">04</span>
+          </div>
+          <div class="phase-meta"><div class="en">ACCUMULATION PHASE</div><div class="id">PHASE · 04</div></div>
+        </div>
+        <h3 class="phase-cn">累積期</h3>
+        <p class="phase-status">短期成果可能不明顯，但所有努力都在未來發酵。</p>
+        <div class="phase-strategy">
+          <div class="phase-strategy-head"><span class="label">CORE STRATEGY</span></div>
+          <div class="phase-strategy-name">積累布局</div>
+        </div>
+        <div class="phase-actions">
+          <span class="label">ACTION GUIDE</span>
+          <div class="phase-tags">
+            <span class="phase-tag">專注累積</span><span class="phase-tag">能力打造</span>
+            <span class="phase-tag">人脈經營</span><span class="phase-tag">時機觀察</span>
+          </div>
+        </div>
+        <div class="phase-quote">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 21c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2h2c0 4-1 5-3 5v3zm12 0c3 0 7-1 7-8V5c0-1.25-.757-2.017-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2h2c0 4-1 5-3 5v3z"></path></svg>
+          <p>現在看似沒有結果，未來會感謝現在的你。</p>
+        </div>
+      </div>
+
+      <!-- 05 攻擊期 -->
+      <div class="glass hud phase-card p-lime">
+        <span class="hud-c1"></span><span class="hud-c2"></span>
+        <div class="phase-head">
+          <div class="phase-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="6"></circle><circle cx="12" cy="12" r="2"></circle></svg>
+            <span class="phase-no-badge">05</span>
+          </div>
+          <div class="phase-meta"><div class="en">ATTACK PHASE</div><div class="id">PHASE · 05</div></div>
+        </div>
+        <h3 class="phase-cn">攻擊期</h3>
+        <p class="phase-status">時機成熟，可以主動出擊，放大優勢，創造成果。</p>
+        <div class="phase-strategy">
+          <div class="phase-strategy-head"><span class="label">CORE STRATEGY</span></div>
+          <div class="phase-strategy-name">主動突破</div>
+        </div>
+        <div class="phase-actions">
+          <span class="label">ACTION GUIDE</span>
+          <div class="phase-tags">
+            <span class="phase-tag">勇敢行動</span><span class="phase-tag">整合資源</span>
+            <span class="phase-tag">精準出擊</span><span class="phase-tag">擴大影響</span>
+            <span class="phase-tag">創造成果</span>
+          </div>
+        </div>
+        <div class="phase-quote">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 21c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2h2c0 4-1 5-3 5v3zm12 0c3 0 7-1 7-8V5c0-1.25-.757-2.017-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2h2c0 4-1 5-3 5v3z"></path></svg>
+          <p>攻擊期是翻轉的關鍵，敢衝的人，才能贏在未來。</p>
+        </div>
+      </div>
+
+      <!-- 06 轉換期 -->
+      <div class="glass hud phase-card p-purple">
+        <span class="hud-c1"></span><span class="hud-c2"></span>
+        <div class="phase-head">
+          <div class="phase-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"></polyline><polyline points="1 20 1 14 7 14"></polyline><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path></svg>
+            <span class="phase-no-badge">06</span>
+          </div>
+          <div class="phase-meta"><div class="en">TRANSITION PHASE</div><div class="id">PHASE · 06</div></div>
+        </div>
+        <h3 class="phase-cn">轉換期</h3>
+        <p class="phase-status">關鍵轉折正在發生，選擇與行動將決定未來走向。</p>
+        <div class="phase-strategy">
+          <div class="phase-strategy-head"><span class="label">CORE STRATEGY</span></div>
+          <div class="phase-strategy-name">抉擇突破</div>
+        </div>
+        <div class="phase-actions">
+          <span class="label">ACTION GUIDE</span>
+          <div class="phase-tags">
+            <span class="phase-tag">明確方向</span><span class="phase-tag">果斷行動</span>
+            <span class="phase-tag">放大優勢</span><span class="phase-tag">管理風險</span>
+            <span class="phase-tag">持續迭代</span>
+          </div>
+        </div>
+        <div class="phase-quote">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 21c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2h2c0 4-1 5-3 5v3zm12 0c3 0 7-1 7-8V5c0-1.25-.757-2.017-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2h2c0 4-1 5-3 5v3z"></path></svg>
+          <p>轉換期沒有標準答案，只有選擇後的全力以赴。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== Scores ====== -->
+<section class="section section-bg-grid" id="scores">
+  <div class="container">
+    <div class="section-head">
+      <div class="badge"><span class="dot"></span>EVALUATION METRICS</div>
+      <h2>不是憑感覺，<br><span class="gold-text">而是用結構判斷。</span></h2>
+      <p class="sub">四個核心指標 · 0-100 量化你的當前狀態</p>
+    </div>
+
+    <div class="scores-grid">
+      <div class="glass hud score-card-big c-cyan">
+        <span class="hud-c1"></span><span class="hud-c2"></span>
+        <div class="head">
+          <div class="icon-box"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path></svg></div>
+          <span class="score-en">STRUCTURE SCORE</span>
+        </div>
+        <div class="label">結構分數</div>
+        <div class="value-row"><span class="value">68</span><span class="unit">/ 100</span></div>
+        <div class="bar"><div data-w="68"></div></div>
+        <p class="desc">代表你的基礎條件、性格結構、資源配置、長期穩定度。</p>
+      </div>
+
+      <div class="glass hud score-card-big c-orange">
+        <span class="hud-c1"></span><span class="hud-c2"></span>
+        <div class="head">
+          <div class="icon-box"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg></div>
+          <span class="score-en">RISK SCORE</span>
+        </div>
+        <div class="label">風險分數</div>
+        <div class="value-row"><span class="value">42</span><span class="unit">/ 100</span></div>
+        <div class="bar"><div data-w="42"></div></div>
+        <p class="desc">代表你當前容易失控、焦慮、誤判、衝動決策的機率。</p>
+      </div>
+
+      <div class="glass hud score-card-big c-green">
+        <span class="hud-c1"></span><span class="hud-c2"></span>
+        <div class="head">
+          <div class="icon-box"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg></div>
+          <span class="score-en">ACTION SCORE</span>
+        </div>
+        <div class="label">行動分數</div>
+        <div class="value-row"><span class="value">71</span><span class="unit">/ 100</span></div>
+        <div class="bar"><div data-w="71"></div></div>
+        <p class="desc">代表你目前適不適合主動出擊、執行、推進、放大成果。</p>
+      </div>
+
+      <div class="glass hud score-card-big c-purple">
+        <span class="hud-c1"></span><span class="hud-c2"></span>
+        <div class="head">
+          <div class="icon-box"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg></div>
+          <span class="score-en">SUPPORT SCORE</span>
+        </div>
+        <div class="label">支援分數</div>
+        <div class="value-row"><span class="value">66</span><span class="unit">/ 100</span></div>
+        <div class="bar"><div data-w="66"></div></div>
+        <p class="desc">代表你目前外部資源、人脈、環境、貴人與系統支持程度。</p>
+      </div>
+    </div>
+
+    <div class="glass hud scores-summary">
+      <span class="hud-c1"></span><span class="hud-c2"></span>
+      <div class="label">SYSTEM SUMMARY</div>
+      <p>四維量化分析，<span class="gold-text" style="font-weight:700">用數據看結構，用結構做決策。</span></p>
+    </div>
+  </div>
+</section>
+
+<!-- ====== Pricing ====== -->
+<section class="section" id="pricing">
+  <div class="container">
+    <div class="section-head">
+      <div class="badge"><span class="dot"></span>PRICING · PLANS</div>
+      <h2>選擇你的決策分析方案</h2>
+      <p class="sub">從入門掃描到長期校準，找到最適合你的進入點。</p>
+    </div>
+
+    <div class="pricing-grid">
+      <!-- Scan -->
+      <div class="glass hud plan tier-cyan">
+        <span class="hud-c1"></span><span class="hud-c2"></span>
+        <div class="plan-head">
+          <div class="plan-tier">入門方案</div>
+          <h3 class="plan-name">Decision Scan</h3>
+          <p class="plan-target">想快速知道自己目前在哪個局的人。</p>
+        </div>
+        <div class="plan-price"><div class="price">NTD 600</div></div>
+        <ul class="plan-items">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>階段判定</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>基礎結構分析</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>風險提示</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>簡短行動建議</li>
+        </ul>
+        <p class="plan-copy">快速知道你現在在哪個局，避免在錯的狀態下做錯決定。</p>
+        <a href="file:///C:/Users/berne/Downloads/index_3.html#cta"><button class="btn btn-ghost">預約 Decision Scan</button></a>
+      </div>
+
+      <!-- Blueprint (featured) -->
+      <div class="glass plan tier-gold featured">
+        <div class="plan-badge">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M5 16L3 5l5.5 5L12 4l3.5 6L21 5l-2 11H5m14 3c0 .6-.4 1-1 1H6c-.6 0-1-.4-1-1v-1h14v1z"></path></svg>
+          推薦方案
+        </div>
+        <div class="plan-head">
+          <div class="plan-tier">核心方案</div>
+          <h3 class="plan-name">Decision Blueprint</h3>
+          <p class="plan-target">想完整建立自己決策模型的人。</p>
+        </div>
+        <div class="plan-price">
+          <div class="price">NTD 1200</div>
+          <div class="note">推薦方案</div>
+        </div>
+        <ul class="plan-items">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>完整結構分析</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>決策階段定位</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>優勢與限制判斷</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>專屬行動策略</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>工作、投資、人生策略建議</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>50 分鐘線上深度解讀</li>
+        </ul>
+        <p class="plan-copy">這不是解盤，是建立你的決策模型。給你一套可以重複使用的判斷系統。</p>
+        <a href="file:///C:/Users/berne/Downloads/index_3.html#cta"><button class="btn btn-primary">預約 Decision Blueprint →</button></a>
+      </div>
+
+      <!-- Precision -->
+      <div class="glass hud plan tier-green">
+        <span class="hud-c1"></span><span class="hud-c2"></span>
+        <div class="plan-head">
+          <div class="plan-tier">進階方案</div>
+          <h3 class="plan-name">Precision Session</h3>
+          <p class="plan-target">已經做過報告，想針對單一問題深度拆解的人。</p>
+        </div>
+        <div class="plan-price">
+          <div class="price">NTD 800</div>
+          <div class="note">/ 50 分鐘</div>
+        </div>
+        <ul class="plan-items">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>單一問題深度拆解</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>即時策略修正</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>關鍵決策判斷</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>行動方向校準</li>
+        </ul>
+        <p class="plan-copy">僅限已建立基礎分析者，針對關鍵決策一對一深度校準。</p>
+        <a href="file:///C:/Users/berne/Downloads/index_3.html#cta"><button class="btn btn-ghost">預約 Precision Session</button></a>
+      </div>
+    </div>
+
+    <!-- 長期方案 -->
+    <div class="glass hud longterm">
+      <span class="hud-c1"></span><span class="hud-c2"></span>
+      <div class="longterm-grid">
+        <div class="longterm-meta">
+          <div class="head">
+            <div class="icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18.178 8c5.096 0 5.096 8 0 8-5.095 0-7.133-8-12.739-8-4.585 0-4.585 8 0 8 5.606 0 7.644-8 12.739-8z"></path></svg></div>
+            <span class="tier">長期方案</span>
+          </div>
+          <h3 class="name">Strategic Subscription</h3>
+          <div><span class="price">NTD 2400</span><span class="note">/ 月</span></div>
+          <p class="copy">長期校準，避免走偏。讓你的決策系統持續進化。</p>
+          <a href="file:///C:/Users/berne/Downloads/index_3.html#cta"><button class="btn btn-ghost">預約 Strategic Subscription</button></a>
+        </div>
+        <div class="longterm-detail">
+          <span class="label">INCLUDES</span>
+          <ul>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>每月結構更新</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>決策校準與變化分析</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>行為節奏優化</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>視需求建立專屬決策輔助系統</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>每月 1 小時線上會議</li>
+          </ul>
+          <div class="target-box">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 1l2.4 7.6L22 11l-7.6 2.4L12 21l-2.4-7.6L2 11l7.6-2.4z"></path></svg>
+            <span>需要長期校準、持續優化決策系統的人。</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== Process ====== -->
+<section class="section section-bg-grid" id="process">
+  <div class="container" style="max-width:880px">
+    <div class="section-head">
+      <div class="badge"><span class="dot"></span>ANALYSIS PROCESS</div>
+      <h2>分析流程</h2>
+      <p class="sub">從資料到策略，五步驟看清你的決策結構。</p>
+    </div>
+
+    <div>
+      <div class="process-step">
+        <div class="process-num-col">
+          <div class="process-num"><span>01</span></div>
+          <div class="process-line"></div>
+        </div>
+        <div class="process-content">
+          <div class="process-meta"><span class="step">STEP 01</span><span class="hr"></span></div>
+          <h3>提供出生資料</h3>
+          <p>出生年月日、出生時間、性別，以及目前最想處理的問題。</p>
+        </div>
+      </div>
+
+      <div class="process-step">
+        <div class="process-num-col">
+          <div class="process-num"><span>02</span></div>
+          <div class="process-line"></div>
+        </div>
+        <div class="process-content">
+          <div class="process-meta"><span class="step">STEP 02</span><span class="hr"></span></div>
+          <h3>建立命盤與結構模型</h3>
+          <p>不是只看單點，而是看整體結構、行為模式與決策傾向。</p>
+        </div>
+      </div>
+
+      <div class="process-step">
+        <div class="process-num-col">
+          <div class="process-num"><span>03</span></div>
+          <div class="process-line"></div>
+        </div>
+        <div class="process-content">
+          <div class="process-meta"><span class="step">STEP 03</span><span class="hr"></span></div>
+          <h3>判斷當前決策階段</h3>
+          <p>定位你目前是修復、防守、觀察、累積、攻擊，還是轉換期。</p>
+        </div>
+      </div>
+
+      <div class="process-step">
+        <div class="process-num-col">
+          <div class="process-num"><span>04</span></div>
+          <div class="process-line"></div>
+        </div>
+        <div class="process-content">
+          <div class="process-meta"><span class="step">STEP 04</span><span class="hr"></span></div>
+          <h3>生成專屬行動策略</h3>
+          <p>提供你當下最適合的方向、風險提醒與行動建議。</p>
+        </div>
+      </div>
+
+      <div class="process-step">
+        <div class="process-num-col">
+          <div class="process-num"><span>05</span></div>
+        </div>
+        <div class="process-content">
+          <div class="process-meta"><span class="step">STEP 05</span><span class="hr"></span></div>
+          <h3>線上解讀與策略校準</h3>
+          <p>用清楚、實用、能落地的方式，幫你理解自己的決策系統。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== Audience ====== -->
+<section class="section section-bg-dots">
+  <div class="container">
+    <div class="section-head">
+      <div class="badge"><span class="dot"></span>WHO IS THIS FOR</div>
+      <h2>這套系統適合誰？</h2>
+    </div>
+
+    <div class="audience-grid">
+      <div class="glass hud audience-card fit">
+        <span class="hud-c1"></span><span class="hud-c2"></span>
+        <div class="audience-head fit">
+          <span class="icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg></span>
+          <div><div class="label">FIT</div><div class="title">適合</div></div>
+        </div>
+        <ul>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>正在人生轉職、轉型、創業的人</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>感情、工作、投資卡住的人</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>明明很努力，但一直看不到結果的人</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>常常衝動決策，事後後悔的人</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>想理解自己行為模式與人生節奏的人</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>想建立長期決策系統，而不是只聽一句吉凶的人</li>
+        </ul>
+      </div>
+
+      <div class="glass hud audience-card notfit" style="border-color:rgba(63,63,70,.6)">
+        <span class="hud-c1"></span><span class="hud-c2"></span>
+        <div class="audience-head notfit">
+          <span class="icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></span>
+          <div><div class="label">NOT FIT</div><div class="title">不適合</div></div>
+        </div>
+        <ul>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>只想聽保證答案的人</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>只想問會不會發財、會不會復合的人</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>完全不想改變行動的人</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>期待別人替你負責人生的人</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== Compare ====== -->
+<section class="section">
+  <div class="container">
+    <div class="section-head">
+      <div class="badge"><span class="dot"></span>DIFFERENCE</div>
+      <h2>我和傳統算命不一樣</h2>
+    </div>
+
+    <div class="compare-grid">
+      <div class="compare-trad">
+        <div class="label">TRADITIONAL</div>
+        <h3>傳統算命</h3>
+        <ul>
+          <li><span class="dot"></span><span class="text">問結果</span></li>
+          <li><span class="dot"></span><span class="text">問吉凶</span></li>
+          <li><span class="dot"></span><span class="text">依賴老師判斷</span></li>
+          <li><span class="dot"></span><span class="text">容易焦慮</span></li>
+          <li><span class="dot"></span><span class="text">聽完不知道怎麼做</span></li>
+        </ul>
+      </div>
+
+      <div class="glass compare-ours">
+        <div class="label">OUR SYSTEM</div>
+        <h3 class="gold-text">科學八字｜決策系統</h3>
+        <ul>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>看結構</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>看階段</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>看策略</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>看風險</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>聽完知道下一步怎麼走</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="compare-outro">
+      <p>
+        <span class="line1">我不是要你相信命。</span>
+        <span class="line2 gold-text">我是要你看懂自己的決策結構。</span>
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ====== Story ====== -->
+<section class="section section-bg-grid">
+  <div class="container">
+    <div class="story-content">
+      <div class="badge"><span class="dot"></span>BRAND STORY</div>
+      <h2>
+        <span class="l1">從人生歸零，</span>
+        <span class="l2 gold-text">到建立決策系統</span>
+      </h2>
+      <p>我曾經開過音樂教室，也經歷過事業收掉、人生歸零的階段。</p>
+      <p>後來我開始研究交易、風險控管、策略系統，也重新整理八字與人生決策之間的關係。</p>
+      <p>我發現，多數人真正的問題不是不努力，而是不知道自己現在處於什麼狀態。在防守期硬攻擊，在修復期硬撐，在觀察期亂下注，在轉換期不敢選擇。</p>
+      <p>所以我把命理變成一套更現代、更結構化、更能落地的決策分析系統。目的不是讓你迷信，而是讓你更清醒地做選擇。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ====== FAQ ====== -->
+<section class="section section-bg-dots" id="faq">
+  <div class="container">
+    <div class="section-head">
+      <div class="badge"><span class="dot"></span>FAQ</div>
+      <h2>常見問題</h2>
+      <p class="sub">關於這套系統，你可能想知道的事。</p>
+    </div>
+
+    <div class="faq-list">
+      <div class="faq-item open">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          <div class="faq-q-left"><span class="faq-q-num">Q01</span><span class="faq-q-text">這是算命嗎？</span></div>
+          <span class="faq-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line></svg></span>
+        </button>
+        <div class="faq-a"><div class="hr"></div><p>不是傳統算命。這套系統會使用八字作為結構分析工具，但重點不是預測吉凶，而是判斷你的行為模式、決策階段與行動策略。</p></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          <div class="faq-q-left"><span class="faq-q-num">Q02</span><span class="faq-q-text">需要提供什麼資料？</span></div>
+          <span class="faq-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg></span>
+        </button>
+        <div class="faq-a"><div class="hr"></div><p>需要出生年月日、出生時間、性別，以及你目前想處理的問題。出生時間越準，分析越完整。</p></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          <div class="faq-q-left"><span class="faq-q-num">Q03</span><span class="faq-q-text">會保證結果嗎？</span></div>
+          <span class="faq-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg></span>
+        </button>
+        <div class="faq-a"><div class="hr"></div><p>不會。這不是保證未來的服務，而是幫你提高判斷品質，降低錯誤決策的成本。</p></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          <div class="faq-q-left"><span class="faq-q-num">Q04</span><span class="faq-q-text">如果我不知道自己要問什麼可以嗎？</span></div>
+          <span class="faq-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg></span>
+        </button>
+        <div class="faq-a"><div class="hr"></div><p>可以。可以先做 Decision Scan 或 Decision Blueprint，先看清目前狀態，再整理真正需要處理的問題。</p></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          <div class="faq-q-left"><span class="faq-q-num">Q05</span><span class="faq-q-text">可以分析工作、感情、投資嗎？</span></div>
+          <span class="faq-toggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg></span>
+        </button>
+        <div class="faq-a"><div class="hr"></div><p>可以，但重點不是直接告訴你答案，而是幫你看清目前決策條件、風險與適合採取的策略。</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== Final CTA ====== -->
+<section class="final-cta bg-techgrid" id="cta">
+  <div class="container">
+    <div class="badge"><span class="dot"></span>FINAL CTA</div>
+    <h2>準備好看清你的決策階段了嗎？</h2>
+    <p class="sub">看對週期，做對決策。
+你的人生將會不同。</p>
+    <div class="actions">
+      <a href="file:///C:/Users/berne/Downloads/index_3.html#pricing"><button class="btn btn-primary">立即預約命理決策分析 →</button></a>
+      <a href="file:///C:/Users/berne/Downloads/index_3.html#pricing"><button class="btn btn-ghost">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+        私訊諮詢服務方案
+      </button></a>
+    </div>
+    <div class="tags">
+      <span>看對週期</span>
+      <span class="dot"></span>
+      <span class="gold">做對決策</span>
+      <span class="dot"></span>
+      <span>人生不同</span>
+    </div>
+  </div>
+</section>
+
+<!-- ====== Footer ====== -->
+<footer class="footer">
+  <div class="container footer-inner">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="logo">
+          <svg width="42" height="42" viewBox="0 0 64 64" fill="none">
+            <defs>
+              <lineargradient id="goldGradF" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="#F5D88A"></stop>
+                <stop offset="100%" stop-color="#B68637"></stop>
+              </lineargradient>
+            </defs>
+            <path d="M32 4 L54 17 L54 47 L32 60 L10 47 L10 17 Z" stroke="url(#goldGradF)" stroke-width="1.2" fill="rgba(212,162,74,0.04)"></path>
+            <path d="M32 12 L47 21 L47 43 L32 52 L17 43 L17 21 Z" stroke="url(#goldGradF)" stroke-width="0.6" opacity="0.4" fill="none"></path>
+            <g stroke="url(#goldGradF)" stroke-width="1.5" stroke-linecap="round" fill="none">
+              <line x1="32" y1="46" x2="32" y2="34"></line><line x1="32" y1="34" x2="24" y2="26"></line>
+              <line x1="32" y1="34" x2="40" y2="26"></line><line x1="24" y1="26" x2="20" y2="20"></line>
+              <line x1="24" y1="26" x2="26" y2="18"></line><line x1="40" y1="26" x2="38" y2="18"></line>
+              <line x1="40" y1="26" x2="44" y2="20"></line>
+            </g>
+            <g fill="#F5D88A">
+              <circle cx="32" cy="46" r="2.2"></circle><circle cx="32" cy="34" r="2"></circle>
+              <circle cx="24" cy="26" r="1.6"></circle><circle cx="40" cy="26" r="1.6"></circle>
+              <circle cx="20" cy="20" r="1.3"></circle><circle cx="26" cy="18" r="1.3"></circle>
+              <circle cx="38" cy="18" r="1.3"></circle><circle cx="44" cy="20" r="1.3"></circle>
+            </g>
+          </svg>
+          <div>
+            <div class="logo-text-main"><span>科學八字</span><span class="sep">|</span><span class="gold-text">決策系統</span></div>
+            <div class="logo-text-sub">DECISION SYSTEM</div>
+          </div>
+        </div>
+        <p class="footer-tagline">不是命運，是你的決策結構。<br>不是預測未來，是看清現在的位置。</p>
+      </div>
+
+      <div class="footer-nav">
+        <span class="label">NAVIGATION</span>
+        <a href="file:///C:/Users/berne/Downloads/index_3.html#phases">六大決策期</a>
+        <a href="file:///C:/Users/berne/Downloads/index_3.html#scores">評估指標</a>
+        <a href="file:///C:/Users/berne/Downloads/index_3.html#pricing">服務方案</a>
+        <a href="file:///C:/Users/berne/Downloads/index_3.html#faq">常見問題</a>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span class="copyright" id="copyright">© 2026 Eight Words Decision System. All rights reserved.</span>
+      <span class="version">EIGHT WORDS · DECISION SYSTEM · v2.0</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+// 導覽列捲動效果
+const navbar = document.getElementById('navbar');
+window.addEventListener('scroll', () => {
+  navbar.classList.toggle('scrolled', window.scrollY > 24);
+});
+
+// 手機版選單
+const menuBtn = document.getElementById('menuBtn');
+const mobileMenu = document.getElementById('mobileMenu');
+menuBtn.addEventListener('click', () => {
+  mobileMenu.classList.toggle('open');
+});
+mobileMenu.querySelectorAll('a').forEach(a => {
+  a.addEventListener('click', () => mobileMenu.classList.remove('open'));
+});
+
+// FAQ accordion
+function toggleFaq(btn) {
+  const item = btn.parentElement;
+  const isOpen = item.classList.contains('open');
+  document.querySelectorAll('.faq-item').forEach(i => {
+    i.classList.remove('open');
+    const svg = i.querySelector('.faq-toggle svg');
+    svg.innerHTML = '<line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>';
+  });
+  if (!isOpen) {
+    item.classList.add('open');
+    const svg = item.querySelector('.faq-toggle svg');
+    svg.innerHTML = '<line x1="5" y1="12" x2="19" y2="12"/>';
+  }
+}
+
+// 進度條動畫（捲動進入視口時觸發）
+const bars = document.querySelectorAll('[data-w]');
+const barObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const w = entry.target.getAttribute('data-w');
+      entry.target.style.width = w + '%';
+      barObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.3 });
+bars.forEach(b => barObserver.observe(b));
+
+// ============ 儀表板數字隨機跳動 ============
+// 每個分數在「基準值 ± 浮動範圍」內隨機跳動，模擬即時運算中的感覺
+const dashScores = [
+  { id: 'score-structure', bar: 'bar-structure', base: 68, range: 5 },
+  { id: 'score-risk',      bar: 'bar-risk',      base: 42, range: 6 },
+  { id: 'score-action',    bar: 'bar-action',    base: 71, range: 5 },
+  { id: 'score-support',   bar: 'bar-support',   base: 66, range: 5 },
+];
+
+// 平滑過渡到新值（用緩動，視覺更有質感）
+function tweenScore(el, barEl, fromVal, toVal, duration = 800) {
+  const start = performance.now();
+  function step(now) {
+    const t = Math.min((now - start) / duration, 1);
+    // ease-out cubic
+    const eased = 1 - Math.pow(1 - t, 3);
+    const current = Math.round(fromVal + (toVal - fromVal) * eased);
+    el.textContent = current;
+    if (barEl) barEl.style.width = current + '%';
+    if (t < 1) requestAnimationFrame(step);
+  }
+  requestAnimationFrame(step);
+}
+
+// 為每個分數獨立排程，讓它們不是同時跳，更像真實儀表
+function scheduleScoreUpdate(score) {
+  const el = document.getElementById(score.id);
+  const barEl = document.getElementById(score.bar);
+  if (!el) return;
+
+  function update() {
+    const currentVal = parseInt(el.textContent, 10) || score.base;
+    // 在 base ± range 之間，限制在 0-99
+    const newVal = Math.max(
+      0,
+      Math.min(99, score.base + Math.round((Math.random() - 0.5) * 2 * score.range))
+    );
+    // 短暫閃光
+    el.style.transition = 'text-shadow .2s, transform .2s';
+    el.style.textShadow = '0 0 12px currentColor';
+    el.style.transform = 'scale(1.04)';
+    setTimeout(() => {
+      el.style.textShadow = '';
+      el.style.transform = '';
+    }, 220);
+
+    tweenScore(el, barEl, currentVal, newVal, 700);
+
+    // 下一次更新：1.6 ~ 3.2 秒後
+    const next = 1600 + Math.random() * 1600;
+    setTimeout(update, next);
+  }
+
+  // 各分數初始延遲不同，避免一起跳
+  setTimeout(update, 800 + Math.random() * 1200);
+}
+
+// 延遲啟動，讓首屏先穩定載入
+setTimeout(() => {
+  dashScores.forEach(scheduleScoreUpdate);
+}, 2000);
+
+// 年份自動更新
+document.getElementById('copyright').textContent =
+  `© ${new Date().getFullYear()} Eight Words Decision System. All rights reserved.`;
+</script>
+
+
+</body></html>
